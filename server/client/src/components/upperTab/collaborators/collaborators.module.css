@@ -1,0 +1,19 @@
+.collaborators{
+    cursor: pointer;
+}
+.show{
+    position: absolute;
+    z-index: 1;
+    background-color: white;
+    top: 2.5rem;
+    left: 1.5rem;
+}
+.option{
+    border-bottom: 1px solid #666;
+    width: 8rem;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+.option:hover{
+    background-color: #ddd;
+}

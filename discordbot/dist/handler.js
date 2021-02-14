@@ -4,29 +4,30 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const commands_1 = __importDefault(require("./commands"));
+const helper = `
+;code <language name> <standard input> <code>   --- to run code. Keep the code in a string.
+;help --- to get list of available commands.
+`;
 async function handlebot(msg) {
-    var _a;
-    //console all messages, except self
-    if (msg.author.tag === "NN#5573")
-        console.log(`SMOL: ${msg.content}`);
-    else if (!(msg.author.tag === "ashish-bot#3739"))
-        console.log(`${msg.author.tag}: ${msg.content}`);
-    let command;
-    let args;
     let prefix = ";";
     //Its for the bot.
-    if (msg.content.startsWith(prefix)) {
-        msg.content.toLowerCase(); //converting everything to lower case to avoid any ambiguity.
-        //extract the arguments
-        args = msg.content.split(' ');
-        //first element of this array will be prefix and command so we take the command out accordingly.
-        command = (_a = args.shift()) === null || _a === void 0 ? void 0 : _a.slice(prefix.length);
+    if (msg.content.startsWith(prefix) || !msg.author.bot) {
+        let args = msg.content.slice(prefix.length).trim().split(' ');
+        const command = args.shift();
+        const language = args.shift();
+        const input = args.shift();
+        let code = "";
+        console.log(command);
         switch (command) {
-            case "bruh":
-                commands_1.default.bruh(args, msg);
+            case "code":
+                code = args.join(' ');
+                const reply = await commands_1.default(input, code, language);
+                msg.reply(reply);
                 break;
+            case "help":
+                msg.reply(helper);
             default:
-                msg.reply("Oops! I don't recognize this command bro!");
+                msg.reply("Oops! I don't recognize this command! Type ;help for more.");
         }
     }
 }

@@ -7,6 +7,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var codehash_1 = __importDefault(require("../codehash"));
 var UserDTO = /** @class */ (function () {
     function UserDTO(obj) {
+        this.output = '';
+        this.error = '';
+        this.stderror = '';
         this.output = obj.output;
         this.code = obj.code;
         this.input = obj.input;
@@ -15,10 +18,13 @@ var UserDTO = /** @class */ (function () {
     }
     UserDTO.prototype.validate = function () {
         if (typeof (this.code) !== "string") {
-            return new Error("code should be inside a string.");
+            return new Error("Invalid Code.");
         }
         if (typeof (this.input) !== "string") {
-            return new Error("input should be inside a string.");
+            return new Error("Invalid input");
+        }
+        if (typeof (this.language) !== "string") {
+            return new Error("Invalid language");
         }
         return null;
     };

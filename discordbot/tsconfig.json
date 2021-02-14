@@ -6,6 +6,6 @@
     "outDir": "./dist"
   },
 
-  "include": ["src/*", "src/commands/bruh.ts"],
+  "include": ["src/*", "src/commands/output.ts"],
   
 }

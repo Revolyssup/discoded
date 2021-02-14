@@ -1,18 +1,14 @@
 /**This is the class for Data transfer Object that is being used to filter and validate the incoming object */
 import codehash from '../codehash'
-interface Iglotresponse{
-    
-        stdout:string,
-        stderr:string,
-        error:string
-    
-}
+
 class UserDTO{
     code: string; 
-    output:Iglotresponse;
+    output:string='';
     input:string;
     language:string;
     hashcode:string;
+    error:string='';
+    stderror:string='';
     constructor(obj:any){
         this.output=obj.output
         this.code=obj.code;
@@ -24,11 +20,14 @@ class UserDTO{
     validate():Error | null{
 
         if(typeof(this.code)!=="string"){
-            return new Error("code should be inside a string.")
+            return new Error("Invalid Code.")
         }       
         if(typeof(this.input)!=="string"){
-            return new Error("input should be inside a string.")
+            return new Error("Invalid input")
         }      
+        if(typeof(this.language)!=="string"){
+            return new Error("Invalid language")
+        }    
         return null;
     }
 

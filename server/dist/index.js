@@ -76,13 +76,15 @@ function connectedToDB(_a) {
                 case 3:
                     response = _b.sent();
                     newCode.output = response.data.stdout;
+                    newCode.stderror = response.data.stderr;
+                    newCode.error = response.data.error;
                     console.log(newCode);
-                    res.json({ output: newCode.output });
+                    res.json({ output: newCode.output, stderror: newCode.stderror, error: newCode.error });
                     userDAO.addCode(newCode);
                     return [3 /*break*/, 5];
                 case 4:
                     console.log("sending cached output");
-                    res.json({ output: newCode.output });
+                    res.json({ output: newCode.output, stderror: newCode.stderror, error: newCode.error });
                     _b.label = 5;
                 case 5: return [3 /*break*/, 7];
                 case 6:

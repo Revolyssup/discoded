@@ -29,12 +29,14 @@ function connectedToDB({ userDAO }: { userDAO: UserDAO }) {
       if (!newCode.output) {
         const response = await solver(newCode.hashcode, newCode.language, newCode.code, newCode.input)
         newCode.output = response.data.stdout;
+        newCode.stderror=response.data.stderr;
+        newCode.error=response.data.error;
         console.log(newCode);
-        res.json({ output: newCode.output });
+        res.json({ output: newCode.output ,stderror: newCode.stderror ,error: newCode.error });
         userDAO.addCode(newCode);
       } else {
         console.log("sending cached output");
-        res.json({ output: newCode.output });
+        res.json({ output: newCode.output ,stderror: newCode.stderror ,error: newCode.error });
       }
     } catch (error) {
       console.dir(error, { depth: 4 })
