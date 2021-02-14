@@ -11,7 +11,7 @@ const fileExtension = (language:string):string => {
     if (language === 'python')
         return '.py';
     return '.ts';
-}
+} 
 
 export default async function solver(name:string,language: string,code: string,input: string){
     const req = { "stdin": input, "files": [{ "name": name+fileExtension(language), "content": code }] };
@@ -22,12 +22,11 @@ export default async function solver(name:string,language: string,code: string,i
         "Authorization": `Token ${process.env.GLOT_TOKEN}`
     };
     
-    const body = req;
     
     return await axios({
         method:'post',
         url:url,
-        data:body,
+        data:req,
         headers:headers
     })
 }

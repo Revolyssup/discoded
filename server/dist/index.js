@@ -46,12 +46,14 @@ var dto_1 = __importDefault(require("./mongo/dto"));
 var dao_1 = __importDefault(require("./mongo/dao"));
 var app = express_1.default();
 var port = process.env.PORT;
-//glot.io Certificate authority isn't recognized by some OS, so temporarily had to do it.
 var newCode;
 app.use(body_parser_1.default.json());
 function connectedToDB(_a) {
     var _this = this;
     var userDAO = _a.userDAO;
+    app.get('/', function (req, res) {
+        res.json({ res: "Welcome to discoded! send your requests to /newcode endpoint ;)" });
+    });
     app.post("/newcode", function (req, res) { return __awaiter(_this, void 0, void 0, function () {
         var _a, response, error_1;
         return __generator(this, function (_b) {

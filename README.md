@@ -24,10 +24,10 @@
 
 2. Before DAO is initialized, the incoming request's body is filtered and verified through DTO(Data transfer Object).
 
-3. 
+
 ## How to use?
 
-1. *Discord bot* Create a discord bot application and generate an authentication token. [Create Discord application](https://discord.com/developers/applications)
+1. *Discord bot* Create a discord bot application and generate an authentication token. [Create Discord application](https://discord.com/developers/applications). Add that token in the .env file of discordbot directory.
 
 2. Generate token from Glot api and add that in .env file in your source directory. 
 
@@ -37,6 +37,14 @@
 NODE_TLS_REJECT_UNAUTHORIZED=0
 ```
 
+4.  Make sure you have docker installed. Build the docker image in discordbot directory and give the image name in docker-compose(server directory) under discordbot service.
+5. cd to server directory and run:
+
+```
+docker compose up
+```
+
+6. Now you can send GET request on port 3000 for running code editor/runner. And your discord bot will be automatically online on whichever discord server you authorized it.
 
 ## Further Improvements.
 

@@ -1,8 +1,15 @@
 /**This is the class for Data transfer Object that is being used to filter and validate the incoming object */
 import codehash from '../codehash'
+interface Iglotresponse{
+    
+        stdout:string,
+        stderr:string,
+        error:string
+    
+}
 class UserDTO{
     code: string; 
-    output:string;
+    output:Iglotresponse;
     input:string;
     language:string;
     hashcode:string;

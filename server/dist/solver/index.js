@@ -55,7 +55,7 @@ var fileExtension = function (language) {
 };
 function solver(name, language, code, input) {
     return __awaiter(this, void 0, void 0, function () {
-        var req, url, headers, body;
+        var req, url, headers;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -65,11 +65,10 @@ function solver(name, language, code, input) {
                         "Content-type": "application/json",
                         "Authorization": "Token " + process.env.GLOT_TOKEN
                     };
-                    body = req;
                     return [4 /*yield*/, axios_1.default({
                             method: 'post',
                             url: url,
-                            data: body,
+                            data: req,
                             headers: headers
                         })];
                 case 1: return [2 /*return*/, _a.sent()];
