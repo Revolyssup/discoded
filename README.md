@@ -52,3 +52,6 @@ docker compose up
 
 2. I plan to replace mongo db with redis. As instead of capping my mongo db collections, I can simply use redis for caching.
 
+## Snapshot
+
+![If you're seeing this text means somehow my image got renamed or deleted lol](https://github.com/Revolyssup/discoded/blob/master/demo.png?raw=true)
