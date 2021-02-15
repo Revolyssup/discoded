@@ -1,4 +1,4 @@
-# **Discoded**  
+# **Discoded**  [in progress]
 *Discord bot+code editor*
 
 - The discord bot is started as soon as the backend server spins up. The code editor is served as a static react application by nginx.
@@ -55,3 +55,5 @@ docker compose up
 ## Snapshot
 
 ![If you're seeing this text means somehow my image got renamed or deleted lol](https://github.com/Revolyssup/discoded/blob/master/demo.png?raw=true)
+
+![If you're seeing this text means somehow my image got renamed or deleted lol](https://github.com/Revolyssup/discoded/blob/master/demo2.png?raw=true)
