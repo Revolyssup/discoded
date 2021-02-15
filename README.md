@@ -37,8 +37,26 @@
 NODE_TLS_REJECT_UNAUTHORIZED=0
 ```
 
-4.  Make sure you have docker installed. Build the docker image in discordbot directory and give the image name in docker-compose(server directory) under discordbot service.
-5. cd to server directory and run:
+4.  Make sure you have docker installed.
+
+### Building the images
+
+5. cd to discordbot and run:
+```
+docker build -t <discordbot_image_name> .
+```
+
+6. cd to server and run:
+```
+docker build -t <discoded_image_name> .
+```
+7. cd to server/client and run:
+```
+docker build -t <nginx_server_image_name> .
+```
+
+8. Replace the container names with appropriate names in docker-compose.
+9. cd to server directory and run:
 
 ```
 docker compose up
