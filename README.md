@@ -52,6 +52,7 @@ docker build -t <discoded_image_name> .
 ```
 7. cd to server/client and run:
 ```
+npm run build
 docker build -t <nginx_server_image_name> .
 ```
 
