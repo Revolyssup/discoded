@@ -504,9 +504,11 @@ module.exports = function (webpackEnv) {
         )
       ),
       new MonacoWebpackPlugin({
+        features: ['!gotoSymbol']
       }),
       // Inlines the webpack runtime script. This script is too small to warrant
       // a network request.
+      
       isEnvProduction &&
       shouldInlineRuntimeChunk &&
       new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [/runtime~.+[.]js/]),

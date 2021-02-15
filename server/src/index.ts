@@ -4,7 +4,7 @@ import solver from './solver';
 import UserDTO from "./mongo/dto";
 import userDAOP, { UserDAO } from "./mongo/dao";
 const app = express();
-const port = process.env.PORT;
+const port = process.env.ID;
 
 
 let newCode: UserDTO;
@@ -16,7 +16,7 @@ function connectedToDB({ userDAO }: { userDAO: UserDAO }) {
     res.json({ res: "Welcome to discoded! send your requests to /newcode endpoint ;)" })
   })
   
-  app.post("/newcode", async (req, res) => {
+  app.post("/api/newcode", async (req, res) => {
     newCode = new UserDTO(req.body);
 
     if (newCode.validate()) {

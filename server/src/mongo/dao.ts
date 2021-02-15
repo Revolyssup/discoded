@@ -6,7 +6,7 @@
 
 import { Collection, Db, MongoClient } from "mongodb";
 import UserDTO from "./dto";
-const uri = `mongodb://root:rootpassword@localhost:27017`;
+const uri = `mongodb://root:rootpassword@mongo:27017`;
 const client = new MongoClient(uri, {
   useUnifiedTopology: true,
   authSource: "admin",

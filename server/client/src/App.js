@@ -69,7 +69,7 @@ class App extends React.Component {
       input: this.state.input
     }
 
-    axios.post('/eval', data)
+    axios.post('/api/newcode', data)
       .then(res => {
         this.setState({ output: res.data });
       })
@@ -125,7 +125,7 @@ class App extends React.Component {
             editorDidMount={this.editorDidMount}
           />
         </div>
-        <div className="view">
+        {/* <div className="view">
           <div className="info">Your socket id is: 65555423fhjv65</div>
           <div className="msgBlock"></div>
           <div className="field">
@@ -134,7 +134,7 @@ class App extends React.Component {
               <button className="button">Send</button>
             </form>
           </div>
-        </div>
+        </div> */}
         <div className='input'>
           <textarea
             className='textBox'
@@ -146,8 +146,10 @@ class App extends React.Component {
           <div className='outputArea'>
             <code>
               OUTPUT:<br />
-              {this.state.output.stderr || this.state.output.error ?
-                (this.state.output.stderr + this.state.output.error) : this.state.output.stdout}
+              output: {this.state.output.output}
+              error: {this.state.output.error}
+              stderr: {this.state.output.stderror}
+              <br />
             </code>
           </div>
         </div>
