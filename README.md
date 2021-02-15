@@ -52,6 +52,9 @@ docker compose up
 
 2. I plan to replace mongo db with redis. As instead of capping my mongo db collections, I can simply use redis for caching.
 
+3. Currenly nginx load_balancer is also responsible for load balancing. I will decouple them.
+
+4. Currently I am load_balancing individual containers hardcoding in nginx which is not very scalable. I plan to offload the load_balancing responsibility to docker-compose so I can give any n number of indentical express server containers without changing nginx configuration,
 ## Snapshot
 
 ![If you're seeing this text means somehow my image got renamed or deleted lol](https://github.com/Revolyssup/discoded/blob/master/demo.png?raw=true)
