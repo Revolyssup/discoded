@@ -21,20 +21,6 @@ services:
       - ID=1000
   
   app2:
-    image: revoly/discoded
-    environment:
-      - ID=2000
-
-  app3:
-    image: revoly/discoded
-    environment:
-      - ID=3000
-
-  app4:
-    image: revoly/discoded
-    environment:
-      - ID=4000
-  app5:
     image: revoly/discordbot
 
   
