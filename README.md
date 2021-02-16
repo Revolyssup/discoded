@@ -62,10 +62,10 @@ docker build -t <nginx_server_image_name> .
 ``` 
 
 8. Replace the container names with appropriate names in docker-compose.
-9. cd to server directory and run:
+9. cd to server directory and run: (replace n with any number of replicas you want.)
 
 ```
-docker compose up
+docker compose up --scale app1=<n> --build
 ```
 
 6. Now you can send GET request on port 3000 for running code editor/runner. And your discord bot will be automatically online on whichever discord server you authorized it.

@@ -10,7 +10,7 @@ export default async function handlebot(msg: discord.Message){
     let prefix:string=";";
 
     //Its for the bot.
-    if(msg.content.startsWith(prefix) || !msg.author.bot){
+    if(msg.content.startsWith(prefix) && !msg.author.bot){
 
 
         let args:string[] = msg.content.slice(prefix.length).trim().split(' ');
