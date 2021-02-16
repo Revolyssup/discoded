@@ -4,6 +4,11 @@
 - The discord bot is started as soon as the backend server spins up. The code editor is served as a static react application by nginx.
 
 - The server is a combination of 6 docker containers, one of which is the discord bot, one is nginx reverse proxy and other four are express servers.
+## Snapshot
+
+![If you're seeing this text means somehow my image got renamed or deleted lol](https://github.com/Revolyssup/discoded/blob/master/demo.png?raw=true)
+
+![If you're seeing this text means somehow my image got renamed or deleted lol](https://github.com/Revolyssup/discoded/blob/master/demo2.png?raw=true)
 
 ## How does it work?
 
@@ -54,7 +59,7 @@ docker build -t <discoded_image_name> .
 ```
 npm run build
 docker build -t <nginx_server_image_name> .
-```
+``` 
 
 8. Replace the container names with appropriate names in docker-compose.
 9. cd to server directory and run:
@@ -74,8 +79,4 @@ docker compose up
 3. Currenly nginx load_balancer is also responsible for load balancing. I will decouple them.
 
 4. Currently I am load_balancing individual containers hardcoding in nginx which is not very scalable. I plan to offload the load_balancing responsibility to docker-compose so I can give any n number of indentical express server containers without changing nginx configuration,
-## Snapshot
 
-![If you're seeing this text means somehow my image got renamed or deleted lol](https://github.com/Revolyssup/discoded/blob/master/demo.png?raw=true)
-
-![If you're seeing this text means somehow my image got renamed or deleted lol](https://github.com/Revolyssup/discoded/blob/master/demo2.png?raw=true)
