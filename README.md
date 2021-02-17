@@ -14,13 +14,13 @@
 
 1. The express server exposes api endpoints which take up the language,code and standard input in request's body from client.(Discord bot or react frontend)
 
-2. The server hashes the entire code along with its input and checks with the database if that hashed value already exists.
+2. The server hashes the entire code along with its input and checks with the database(first redis then mongodb) if that hashed value already exists.
 
-3. The mongo database here stores documents with hashed code and their output , therefore it acts as a caching mechanism.
+3. The mongo and redis database here stores documents with hashed code and their output ,redis acts as a caching mechanism.
 
 4. If no such hashcode exists then the request is re-structured and forwarded to GLOT API endpoint, which responds with the standard output, standard error, and error.
 
-5. That output is first sent back to the client and then the hashcode along with the output is stored in mongo db for future caching.
+5. That output is first sent back to the client and then the hashcode along with the output is stored in mongo db & redis for future caching.
 
 
 ## Few implementation details
