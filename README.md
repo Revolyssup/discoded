@@ -60,7 +60,7 @@ sudo ./main.sh
 ```
 docker-compose down
 ```
-to stop the containers.
+to stop the containers. 
 ## Further Improvements.
 
 1. This external call to Glot api is pretty expensive so I plan to replace that with my own code runner built in go. I have currently written C/C++/Java code runner in bash but a better version can be made in GO.

@@ -4,6 +4,7 @@
  * we switch the data base in future, we only have to make changes in this class.
  */
 
+import { json } from "express";
 import { Collection, Db, MongoClient } from "mongodb";
 import redis, { RedisClient } from 'redis';
 import {promisify} from 'util'
@@ -16,38 +17,61 @@ const client = new MongoClient(uri, {
   useUnifiedTopology: true,
   authSource: "admin",
 });
-// const redisclient:RedisClient=redis.createClient({
-//   host:'http://redis',
-//   port:6379
-// })
+const redisclient:RedisClient=redis.createClient({
+  host:'redis',
+  port:6379,
+  password:'root'
+})
 
 // const getfromredis=promisify(redisclient.get).bind(client);
+// const setonredis=promisify(redisclient.set).bind(client);
 
 
 export class UserDAO {
   db: Db;
   coll: Collection;
   cli: MongoClient;
-  constructor(client: MongoClient) {
+  rcli:RedisClient;
+  getfromredis:Function;
+  setonredis:Function;
+  constructor(client: MongoClient,redisClient:RedisClient) {
     console.log("hy")
     this.cli = client;
     this.db = this.cli.db("Ashish");
     this.coll = this.db.collection("Users");
+    this.rcli=redisClient;
+    this.getfromredis=promisify(this.rcli.get).bind(this.rcli);
+    this.setonredis=promisify(this.rcli.set).bind(this.rcli);
   }
 
   async addCode(aud: UserDTO) {
-    const prom = await this.coll.insertOne({
-      code: aud.hashcode,
-      output:aud.output
-    });
-    return prom;
+    this.rcli.set(JSON.stringify(aud.hashcode),JSON.stringify(aud.output),async (err,reply)=>{
+      const prom = await this.coll.insertOne({
+        code: aud.hashcode,
+        output:aud.output
+      });
+      if(!err) console.log("cached in redis");
+       return prom;
+    })
+    // const prom = await this.coll.insertOne({
+    //   code: aud.hashcode,
+    //   output:aud.output
+    // });
+    // await this.setonredis(JSON.stringify(aud.hashcode),JSON.stringify(aud.output));
+    // return prom;
   }
 
-  async checkCode(aud: UserDTO){
-      // getfromredis("{code:aud.hashcode}")
-      const prom=await this.coll.find({code:aud.hashcode}).toArray();
-      if(prom.length) return prom[0].output;
-      return null;
+  async checkCode(aud: UserDTO):Promise<string |null>{
+      const val=await this.getfromredis(JSON.stringify(aud.hashcode));
+      if(!val){
+        console.log('serving from mongodb');
+        const prom=await this.coll.find({code:aud.hashcode}).toArray();
+            if(prom.length) return prom[0].output;
+            return null;
+      }
+      console.log('serving from redis');
+      return JSON.parse(val).output;
+
   }
 }
 
@@ -56,7 +80,7 @@ export default function () {
     client.connect().then((connectedClient) => {
       if (!connectedClient) rej(Error("Could not connect to mongo"));
       else {
-        const userDao = new UserDAO(connectedClient);
+        const userDao = new UserDAO(connectedClient,redisclient);
         res(userDao);
       }
     });

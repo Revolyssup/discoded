@@ -3,7 +3,7 @@ import codehash from '../codehash'
 
 class UserDTO{
     code: string; 
-    output:string='';
+    output:string| null='';
     input:string;
     language:string;
     hashcode:string;

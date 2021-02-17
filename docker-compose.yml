@@ -15,6 +15,15 @@ services:
           MONGO_INITDB_ROOT_PASSWORD: rootpassword
         volumes:
           - ./data:/data/db
+  redis:
+        image: redis:latest
+        command: redis-server --requirepass root
+        ports:
+          - 6379:6379
+        volumes:
+          - ./redisdata:/var/lib/redis
+        
+
   app1:
     image: revoly/discoded
     environment:
