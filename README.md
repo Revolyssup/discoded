@@ -44,32 +44,23 @@ NODE_TLS_REJECT_UNAUTHORIZED=0
 
 4.  Make sure you have docker installed.
 
-### Building the images
-
-5. cd to discordbot and run:
+### Building the images and running containers.
+5. Give the permission to ./main.sh
 ```
-docker build -t <discordbot_image_name> .
-```
-
-6. cd to server and run:
-```
-docker build -t <discoded_image_name> .
-```
-7. cd to server/client and run:
-```
-npm run build
-docker build -t <nginx_server_image_name> .
-``` 
-
-8. Replace the container names with appropriate names in docker-compose.
-9. cd to server directory and run: (replace n with any number of replicas you want.)
-
-```
-docker compose up --scale app1=<n> --build
+chmod +x ./main.sh
 ```
 
-6. Now you can send GET request on port 3000 for running code editor/runner. And your discord bot will be automatically online on whichever discord server you authorized it.
+6. 
+```
+sudo ./main.sh
+```
+7. Now you can send GET request on port 3000 for running code editor/runner. And your discord bot will be automatically online on whichever discord server you authorized it.
 
+8. Run 
+```
+docker-compose down
+```
+to stop the containers.
 ## Further Improvements.
 
 1. This external call to Glot api is pretty expensive so I plan to replace that with my own code runner built in go. I have currently written C/C++/Java code runner in bash but a better version can be made in GO.

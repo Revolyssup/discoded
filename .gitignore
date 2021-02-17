@@ -3,3 +3,4 @@ node_modules/
 server/.env
 /discordbot/.env
 server/data1
+data

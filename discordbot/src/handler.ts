@@ -12,7 +12,7 @@ export default async function handlebot(msg: discord.Message){
     //Its for the bot.
     if(msg.content.startsWith(prefix) && !msg.author.bot){
 
-
+        
         let args:string[] = msg.content.slice(prefix.length).trim().split(' ');
        
         const command = args.shift();
@@ -29,6 +29,7 @@ export default async function handlebot(msg: discord.Message){
                 break;
             case "help":
                 msg.reply(helper);
+                break;
             default:
                 msg.reply("Oops! I don't recognize this command! Type ;help for more.")
         }

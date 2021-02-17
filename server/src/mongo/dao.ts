@@ -5,12 +5,24 @@
  */
 
 import { Collection, Db, MongoClient } from "mongodb";
+import redis, { RedisClient } from 'redis';
+import {promisify} from 'util'
+
+
+
 import UserDTO from "./dto";
 const uri = `mongodb://root:rootpassword@mongo:27017`;
 const client = new MongoClient(uri, {
   useUnifiedTopology: true,
   authSource: "admin",
 });
+// const redisclient:RedisClient=redis.createClient({
+//   host:'http://redis',
+//   port:6379
+// })
+
+// const getfromredis=promisify(redisclient.get).bind(client);
+
 
 export class UserDAO {
   db: Db;
@@ -32,6 +44,7 @@ export class UserDAO {
   }
 
   async checkCode(aud: UserDTO){
+      // getfromredis("{code:aud.hashcode}")
       const prom=await this.coll.find({code:aud.hashcode}).toArray();
       if(prom.length) return prom[0].output;
       return null;

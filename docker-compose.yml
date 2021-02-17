@@ -14,7 +14,7 @@ services:
           MONGO_INITDB_ROOT_USERNAME: root
           MONGO_INITDB_ROOT_PASSWORD: rootpassword
         volumes:
-          - ./data1:/data/db
+          - ./data:/data/db
   app1:
     image: revoly/discoded
     environment:
