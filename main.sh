@@ -1,5 +1,6 @@
 if [[ "$(docker images -q revoly/nginx 2> /dev/null)" == "" ]]; then
     cd client;
+    npm run build
     docker build -t revoly/nginx .
     cd ../
 fi
