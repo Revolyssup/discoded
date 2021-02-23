@@ -1,0 +1,5 @@
+FROM gcc:4.9
+COPY codes/test.cpp /usr/src/myapp/test.cpp
+WORKDIR /usr/src/myapp
+RUN g++ -o myapp test.cpp
+CMD ["./myapp"]

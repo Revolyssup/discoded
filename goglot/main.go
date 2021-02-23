@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"net/http"
 )
@@ -12,14 +13,19 @@ func p(a interface{}) {
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	var in Input
-
+	var response Output = Output{
+		Stdout: "",
+		Stderr: "",
+		Err:    errors.New(""),
+	}
 	err := json.NewDecoder(r.Body).Decode(&in)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	response, err := CodeRunner(r.Context(), in)
+	response, err = CodeRunner(r.Context(), in)
 	if err != nil {
+		response.Err = err
 		panic(err)
 	}
 	res, err := json.Marshal(response)

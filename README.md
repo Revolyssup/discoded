@@ -65,9 +65,8 @@ to stop the containers.
 
 1. This external call to Glot api is pretty expensive so I plan to replace that with my own code runner built in go. I have currently written C/C++/Java code runner in bash but a better version can be made in GO.
 
-2. I plan to replace mongo db with redis. As instead of capping my mongo db collections, I can simply use redis for caching.
+2. I plan to use mongo db with redis. As instead of capping my mongo db collections, I can simply use redis for caching. :ballot_box_with_check:
 
-3. Currenly nginx load_balancer is also responsible for load balancing. I will decouple them.
 
-4. Currently I am load_balancing individual containers hardcoding in nginx which is not very scalable. I plan to offload the load_balancing responsibility to docker-compose so I can give any n number of indentical express server containers without changing nginx configuration,
+3. Currently I am load_balancing individual containers hardcoding in nginx which is not very scalable. I plan to offload the load_balancing responsibility to docker-compose so I can give any n number of indentical express server containers without changing nginx configuration, :ballot_box_with_check:
 
