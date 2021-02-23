@@ -4,7 +4,6 @@
  * we switch the data base in future, we only have to make changes in this class.
  */
 
-import { json } from "express";
 import { Collection, Db, MongoClient } from "mongodb";
 import redis, { RedisClient } from 'redis';
 import {promisify} from 'util'
