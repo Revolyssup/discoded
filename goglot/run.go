@@ -11,7 +11,12 @@ func CodeRunner(ctx context.Context, in Input) (Output, error) {
 	switch in.Language {
 	case "cpp":
 		{
-
+			stdout, stderr, err := CreateNewContainer(ctx, "revoly/cpprunner", in.Code, in.Input, in.Language)
+			if err != nil {
+				panic(err)
+			}
+			out.Stdout = stdout
+			out.Stderr = stderr
 		}
 	case "c":
 		{
@@ -26,5 +31,6 @@ func CodeRunner(ctx context.Context, in Input) (Output, error) {
 			return out, errors.New("Invalid Language")
 		}
 	}
+	p(out)
 	return out, nil
 }

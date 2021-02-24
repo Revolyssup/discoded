@@ -8,7 +8,7 @@ import (
 )
 
 func p(a interface{}) {
-	fmt.Printf("Printing.. %+#v of type %T", a, a)
+	fmt.Printf("\nPrinting.. %+#v of type %T\n", a, a)
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -38,6 +38,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	p("Executing go code!")
 	http.HandleFunc("/", handler)
 
 	err := http.ListenAndServe(":3000", nil)
