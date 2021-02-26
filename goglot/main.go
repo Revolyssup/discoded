@@ -23,6 +23,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
+	p(in)
 	response, err = CodeRunner(r.Context(), in)
 	if err != nil {
 		response.Err = err

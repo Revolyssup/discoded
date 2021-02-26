@@ -70,3 +70,4 @@ to stop the containers.
 
 3. Currently I am load_balancing individual containers hardcoding in nginx which is not very scalable. I plan to offload the load_balancing responsibility to docker-compose so I can give any n number of indentical express server containers without changing nginx configuration, :ballot_box_with_check:
 
+<!-- docker run -it -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock revoly/goglot -->
