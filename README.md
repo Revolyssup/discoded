@@ -1,5 +1,5 @@
 # **Discoded**  [in progress]
-*Discord bot+code editor*
+*Discord bot+code editor+GOGLOT code runner*
 
 - The discord bot is started as soon as the backend server spins up. The code editor is served as a static react application by nginx.
 
