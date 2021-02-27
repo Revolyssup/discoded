@@ -20,6 +20,9 @@
 
 4. If no such hashcode exists then the request is re-structured and forwarded to GOGLOT API endpoint, which responds with the standard output, standard error, and error.
 
+5. GOGLOT is a go server which is spun up with the docker.sock of host machine given to it through volumes and for each request,
+it creates a container for that language, runs the code, flushes the output and a go routine comes and clear the stopped containers while the generated output is sent back to the client.
+
 5. That output is first sent back to the client and then the hashcode along with the output is stored in mongo db & redis for future caching.
 
 
