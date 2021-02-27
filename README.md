@@ -3,7 +3,7 @@
 
 - The discord bot is started as soon as the backend server spins up. The code editor is served as a static react application by nginx.
 
-- The server is a combination of 6 docker containers(you can rescale in main.sh , docker compose is doing the load balancing between containers), one of which is the discord bot, one is nginx reverse proxy and other four are express servers.
+- The server is a combination of 6 docker containers, one of which is the discord bot, one is nginx reverse proxy and other four(you can rescale in main.sh , docker compose is doing the load balancing between containers) are express servers.
 ## Snapshot
 
 ![If you're seeing this text means somehow my image got renamed or deleted lol](https://github.com/Revolyssup/discoded/blob/master/demo.png?raw=true)
