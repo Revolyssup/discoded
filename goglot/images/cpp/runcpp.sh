@@ -1,4 +1,5 @@
 #!/bin/bash
-cat test.cpp
-cat inputFile
-cat inputfile | g++ -o myapp test.cpp > ./output
+echo "$2" > "$3"
+g++ -o myapp "$3"
+echo "$1" | ./myapp
+
