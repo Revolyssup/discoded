@@ -12,7 +12,7 @@
 
 ## How does it work?
 
-1. The express server exposes api endpoints which take up the language,code and standard input in request's body from client.(Discord bot or react frontend)
+1. The express server exposes api endpoints which take up the language,code and standard input in request's body from client.(Discord bot or code editor)
 
 2. The server hashes the entire code along with its input and checks with the database(first redis then mongodb) if that hashed value already exists.
 
