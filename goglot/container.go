@@ -7,6 +7,7 @@ import (
 
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
+	"github.com/docker/docker/api/types/filters"
 	"github.com/docker/docker/client"
 	"github.com/docker/docker/pkg/stdcopy"
 	"github.com/docker/go-connections/nat"
@@ -114,10 +115,12 @@ func CreateNewContainer(ctx context.Context, image string, code string, input st
 		panic(err)
 	}
 
-	// Stop the container after collecting the logs
-	// if err := cli.ContainerStop(ctx, cont.ID, nil); err != nil {
-	// 	panic("[CONTAINER FAILURE]: Failed to stop the container: " + err.Error())
-	// }
+	go func() {
+		_, err := cli.ContainersPrune(ctx, filters.Args{})
+		if err != nil {
+			panic("[Clean up failed]: Could not remove containers")
+		}
+	}()
 
 	bufout := new(bytes.Buffer)
 	buferr := new(bytes.Buffer)
