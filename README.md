@@ -68,7 +68,7 @@ to stop the containers.
 Problem:- My alternate to the GLOT API, which I call goglot is almost ready except for one small thing. To get stderr and stdout 
 seperately from the code running container, I have to detach the tty while creating the container as mentioned in the api docs
 of docker engine sdk for GO. Now as I have detached the tty, the container exits as soon as it runs the code and containerlog function
-is not able to fetch the logs from the container. Then I used tail command as the ENTRYPOINT to the code running container with -f flag to the output file such that it waits till my code output is pushed to the output file, but this time I am getting error which says tail cannot recognize the file system, which is probably due to contradiction of filesystem outside the container and inside the container, I plan to get around this as soon as possible in order to complete the code runner.  
+is not able to fetch the logs from the container. Then I used tail command as the ENTRYPOINT to the code running container with -f flag to the output file such that it waits till my code output is pushed to the output file, but tail will be started as pid 1,so we will get logs from there and not the code running container. 
 
 
 2. I plan to use mongo db with redis. As instead of capping my mongo db collections, I can simply use redis for caching. :ballot_box_with_check:
