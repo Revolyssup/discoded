@@ -23,7 +23,7 @@
 5. GOGLOT is a go server which is spun up with the docker.sock of host machine given to it through volumes and for each request,
 it creates a container for that language, runs the code, flushes the output and a go routine comes and clear the stopped containers while the generated output is sent back to the client. 
 
-Note:- As of now, calls are made to glot api and not goglot, as few things are needed to be improved there, asap it will be integrated. No code changes are to be made in the express server as my api request/response are identical with GLOT API. I did this for backwards compatibility.
+
 6. That output is first sent back to the client and then the hashcode along with the output is stored in mongo db & redis for future caching.
 
 
@@ -38,29 +38,22 @@ Note:- As of now, calls are made to glot api and not goglot, as few things are n
 
 1. *Discord bot* Create a discord bot application and generate an authentication token. [Create Discord application](https://discord.com/developers/applications). Add that token in the .env file of discordbot directory.
 
-2. Generate token from Glot api and add that in .env file in your source directory. 
 
-3. For some reason, Glot api's certificate authority is not trusted by few operating systems(at least mine) as of now so add the below line in .env file.(we can trust glot ;))
-
-```
-NODE_TLS_REJECT_UNAUTHORIZED=0
-```
-
-4.  Make sure you have docker installed.
+2.  Make sure you have docker installed.
 
 ### Building the images and running containers.
-5. Give the permission to ./main.sh
+3. Give the permission to ./main.sh
 ```
 chmod +x ./main.sh
 ```
 
-6. 
+4. 
 ```
 sudo ./main.sh
 ```
-7. Now you can send GET request on port 3000 for running code editor/runner. And your discord bot will be automatically online on whichever discord server you authorized it.
+5. Now you can send GET request on port 3000 for running code editor/runner. And your discord bot will be automatically online on whichever discord server you authorized it.
 
-8. Run 
+6. Run 
 ```
 docker-compose down
 ```
@@ -75,4 +68,3 @@ to stop the containers.
 
 3. Currently I am load_balancing individual containers hardcoding in nginx which is not very scalable. I plan to offload the load_balancing responsibility to docker-compose so I can give any n number of indentical express server containers without changing nginx configuration, :ballot_box_with_check:
 
-<!-- docker run -it -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock revoly/goglot -->
