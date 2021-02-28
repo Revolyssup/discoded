@@ -14,16 +14,7 @@ import (
 )
 
 //CreateNewContainer ... Creates a new container based on given image and context of request and returns the standard output and error from it
-func CreateNewContainer(ctx context.Context, image string, code string, input string, lan string) (string, string, error) {
-	var script string
-	var filename string
-	switch lan {
-	case "cpp":
-		{
-			script = "./runcpp.sh"
-			filename = "test.cpp"
-		}
-	}
+func CreateNewContainer(ctx context.Context, image string, code string, input string, script string, filename string) (string, string, error) {
 	cli, err := client.NewEnvClient()
 	if err != nil {
 		fmt.Println("Unable to create docker client")
@@ -54,11 +45,6 @@ func CreateNewContainer(ctx context.Context, image string, code string, input st
 		},
 		&container.HostConfig{
 			PortBindings: portBinding,
-			AutoRemove:   false,
-			// Resources:container.Resources{
-			// 	CPUShares:
-			// }
-
 		}, nil, nil, "")
 	if err != nil {
 		panic(err)
@@ -70,42 +56,6 @@ func CreateNewContainer(ctx context.Context, image string, code string, input st
 		panic("Could not start the container")
 	}
 
-	// statusCh, errCh := cli.ContainerWait(ctx, resp.ID, container.wa)
-	// select {
-	// case err := <-errCh:
-	// 	if err != nil {
-	// 		panic(err)
-	// 	}
-	// case <-statusCh:
-	// }
-
-	// err = cli.CopyToContainer(ctx, cont.ID, "/usr/src/myapp/", createTar(filename, code), types.CopyToContainerOptions{})
-	// if err != nil {
-	// 	fmt.Printf("error copying code to container: %s\n", err)
-	// 	panic("Could not copy code to the container")
-	// }
-
-	// err = cli.CopyToContainer(ctx, cont.ID, "/usr/src/myapp/", createTar(inputfile, input), types.CopyToContainerOptions{})
-	// if err != nil {
-	// 	fmt.Printf("error copying input to container: %s\n", err)
-	// 	panic("Could not copy input to the container")
-	// }
-
-	// Create an exec process
-	// execResp, err := cli.ContainerExecCreate(ctx, cont.ID, types.ExecConfig{
-	// 	Cmd: []string{script},
-	// })
-	// if err != nil {
-	// 	panic("[EXEC CREATE FAIL]: Failed to exec in the container: " + err.Error())
-	// }
-
-	// // Start the exec process
-	// if err := cli.ContainerExecStart(ctx, execResp.ID, types.ExecStartCheck{}); err != nil {
-	// 	panic("[EXEC START FAIL]: Failed to exec in the container: " + err.Error())
-	// }
-
-	// time.Sleep(5 * time.Second)
-
 	fmt.Printf("Container %s is started", cont.ID)
 
 	// The missing "follow" in the containerlogsoptions costed me 2 days. Because I couldn't get any logs out even though my code running container
@@ -115,6 +65,7 @@ func CreateNewContainer(ctx context.Context, image string, code string, input st
 		panic(err)
 	}
 
+	//cleanup
 	go func() {
 		_, err := cli.ContainersPrune(ctx, filters.Args{})
 		if err != nil {
@@ -122,6 +73,7 @@ func CreateNewContainer(ctx context.Context, image string, code string, input st
 		}
 	}()
 
+	//demultiplexing the output and returning it
 	bufout := new(bytes.Buffer)
 	buferr := new(bytes.Buffer)
 	stdcopy.StdCopy(bufout, buferr, out)
@@ -130,28 +82,3 @@ func CreateNewContainer(ctx context.Context, image string, code string, input st
 
 	return stdout, stderr, nil
 }
-
-// func createTar(filename, content string) io.Reader {
-// 	var buf bytes.Buffer
-// 	tw := tar.NewWriter(&buf)
-
-// 	hdr := &tar.Header{
-// 		Name: filename,
-// 		Mode: 0600,
-// 		Size: int64(len(content)),
-// 	}
-
-// 	if err := tw.WriteHeader(hdr); err != nil {
-// 		fmt.Println("[TAR ERROR]:", err)
-// 	}
-
-// 	if _, err := tw.Write([]byte(content)); err != nil {
-// 		fmt.Println("[TAR ERROR]:", err)
-// 	}
-
-// 	if err := tw.Close(); err != nil {
-// 		fmt.Println("[TAR ERROR]:", err)
-// 	}
-
-// 	return tar.NewReader(&buf)
-// }
