@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"net/http"
 )
@@ -16,7 +15,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	var response Output = Output{
 		Stdout: "",
 		Stderr: "",
-		Err:    errors.New(""),
+		Err:    "",
 	}
 	err := json.NewDecoder(r.Body).Decode(&in)
 	if err != nil {
@@ -26,8 +25,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	p(in)
 	response, err = CodeRunner(r.Context(), in)
 	if err != nil {
-		response.Err = err
-		panic(err)
+		response.Err = err.Error()
+		fmt.Println(err)
 	}
 	res, err := json.Marshal(response)
 	if err != nil {
@@ -42,7 +41,7 @@ func main() {
 	p("Executing go code!")
 	http.HandleFunc("/", handler)
 
-	err := http.ListenAndServe(":3000", nil)
+	err := http.ListenAndServe(":5000", nil)
 	if err != nil {
 		fmt.Println(err)
 		return

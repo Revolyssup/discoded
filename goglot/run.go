@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"errors"
+	"fmt"
 )
 
 //CodeRunner ... Spins the container
@@ -43,10 +44,10 @@ func CodeRunner(ctx context.Context, in Input) (Output, error) {
 	}
 	stdout, stderr, err := CreateNewContainer(ctx, image, in.Code, in.Input, script, filename)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 	out.Stdout = stdout
 	out.Stderr = stderr
 	p(out)
-	return out, nil
+	return out, err
 }

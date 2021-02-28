@@ -3,11 +3,12 @@ package main
 import (
 	"bytes"
 	"context"
+	"errors"
 	"fmt"
+	"time"
 
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
-	"github.com/docker/docker/api/types/filters"
 	"github.com/docker/docker/client"
 	"github.com/docker/docker/pkg/stdcopy"
 	"github.com/docker/go-connections/nat"
@@ -27,7 +28,7 @@ func CreateNewContainer(ctx context.Context, image string, code string, input st
 	}
 	containerPort, err := nat.NewPort("tcp", "80")
 	if err != nil {
-		panic("Unable to get the port")
+		fmt.Println("Unable to get the port")
 	}
 
 	fmt.Println("[INPUT CODE]", code)
@@ -47,7 +48,7 @@ func CreateNewContainer(ctx context.Context, image string, code string, input st
 			PortBindings: portBinding,
 		}, nil, nil, "")
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 	fmt.Printf("%v is the container id\n", cont.ID)
 	err = cli.ContainerStart(ctx, cont.ID, types.ContainerStartOptions{})
@@ -58,18 +59,36 @@ func CreateNewContainer(ctx context.Context, image string, code string, input st
 
 	fmt.Printf("Container %s is started", cont.ID)
 
+	stopch := make(chan int)
+	// if the container exceeds the time limit
+	go stopContainer(cli, cont.ID, stopch)
+
+	//wait untill the container stops
+	statusCh, errCh := cli.ContainerWait(ctx, cont.ID, container.WaitConditionNotRunning)
+	select {
+	case err := <-errCh:
+		if err != nil {
+			panic(err)
+		}
+	case <-statusCh:
+	case <-stopch:
+		{
+			return "", "", errors.New("Time limit exceeded")
+		}
+	}
+
 	// The missing "follow" in the containerlogsoptions costed me 2 days. Because I couldn't get any logs out even though my code running container
 	//was clearly flushing them in stdout. :(
 	out, err := cli.ContainerLogs(ctx, cont.ID, types.ContainerLogsOptions{ShowStdout: true, ShowStderr: true, Follow: true})
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 
 	//cleanup
 	go func() {
-		_, err := cli.ContainersPrune(ctx, filters.Args{})
+		err := cli.ContainerRemove(context.TODO(), cont.ID, types.ContainerRemoveOptions{})
 		if err != nil {
-			panic("[Clean up failed]: Could not remove containers")
+			fmt.Println(err)
 		}
 	}()
 
@@ -81,4 +100,15 @@ func CreateNewContainer(ctx context.Context, image string, code string, input st
 	stderr := buferr.String()
 
 	return stdout, stderr, nil
+}
+
+func stopContainer(cli *client.Client, containerID string, stopch chan<- int) {
+	time.Sleep(3 * time.Second)
+	err := cli.ContainerStop(context.TODO(), containerID, nil)
+	if err != nil {
+		//maybe the container exited normally or the TLE occurred
+		fmt.Println(err)
+	} else {
+		stopch <- 1
+	}
 }

@@ -63,9 +63,11 @@ export class UserDAO {
   async checkCode(aud: UserDTO):Promise<string |null>{
       const val=await this.getfromredis(JSON.stringify(aud.hashcode));
       if(!val){
-        console.log('serving from mongodb');
         const prom=await this.coll.find({code:aud.hashcode}).toArray();
-            if(prom.length) return prom[0].output;
+            if(prom.length){
+              console.log('serving from mongodb');
+              return prom[0].output;
+            } 
             return null;
       }
       console.log('serving from redis');

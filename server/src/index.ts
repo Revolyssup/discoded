@@ -27,10 +27,10 @@ function connectedToDB({ userDAO }: { userDAO: UserDAO }) {
     try {
       newCode.output = await userDAO.checkCode(newCode);
       if (!newCode.output) {
-        const response = await solver(newCode.hashcode, newCode.language, newCode.code, newCode.input)
+        const response = await solver(newCode.language, newCode.code, newCode.input)
         newCode.output = response.data.stdout;
         newCode.stderror=response.data.stderr;
-        newCode.error=response.data.error;
+        newCode.error=response.data.err;
         console.log(newCode);
         res.json({ output: newCode.output ,stderror: newCode.stderror ,error: newCode.error });
         userDAO.addCode(newCode);

@@ -18,5 +18,33 @@ if [[ "$(docker images -q revoly/discordbot 2> /dev/null)" == "" ]]; then
     cd ../
 fi
 
+if [[ "$(docker images -q revoly/goglot 2> /dev/null)" == "" ]]; then
+    cd goglot
+    docker build -t revoly/goglot .
+    cd ../
+fi
 
+if [[ "$(docker images -q revoly/cpprunner 2> /dev/null)" == "" ]]; then
+    cd goglot/images/cpp
+    docker build -t revoly/cpprunner .
+    cd ../
+fi
+
+if [[ "$(docker images -q revoly/crunner 2> /dev/null)" == "" ]]; then
+    cd goglot/images/c
+    docker build -t revoly/crunner .
+    cd ../
+fi
+
+if [[ "$(docker images -q revoly/jsrunner 2> /dev/null)" == "" ]]; then
+    cd goglot/images/js
+    docker build -t revoly/jsrunner .
+    cd ../
+fi
+
+if [[ "$(docker images -q revoly/gorunner 2> /dev/null)" == "" ]]; then
+    cd goglot/images/go
+    docker build -t revoly/gorunner .
+    cd ../
+fi
 docker-compose up --scale app1=4 

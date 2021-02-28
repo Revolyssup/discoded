@@ -23,6 +23,12 @@ services:
         volumes:
           - ./redisdata:/var/lib/redis
         
+  goglot:
+    image: revoly/goglot
+    ports:
+      - 5000:5000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
 
   app1:
     image: revoly/discoded
@@ -32,4 +38,3 @@ services:
   app2:
     image: revoly/discordbot
 
-  

@@ -4,7 +4,7 @@ package main
 type Output struct {
 	Stdout string `json:"stdout"`
 	Stderr string `json:"stderr"`
-	Err    error  `json:"err"`
+	Err    string `json:"err"`
 }
 
 //Input ...
