@@ -12,7 +12,7 @@ export default async function botoutput(input:string | undefined,code:string | u
     }
 
     if(res.data.error!==''){
-        reply+=`Error: ${res.data.error}`
+        reply+=`Error: ${res.data.err}`
     }
     return reply;
 } 
