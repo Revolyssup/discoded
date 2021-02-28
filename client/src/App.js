@@ -4,7 +4,7 @@ import axios from 'axios';
 import ReactModal from 'react-modal';
 import './App.css';
 import UpperTab from "./components/upperTab/upperTab";
-import Button from './components/Button/button';
+// import Button from './components/Button/button';
 
 ReactModal.setAppElement('#root');
 
@@ -39,6 +39,8 @@ class App extends React.Component {
       language = 'javascript';
     else if (event.target.value === 'Python3')
       language = 'python';
+    else if (event.target.value === 'Go')
+      language = 'go';
     this.setState({ language })
   }
 
@@ -115,8 +117,8 @@ class App extends React.Component {
             click={this.click}
             modal={this.handleOpenModal} />
           <MonacoEditor
-            width="70vw"
-            height={(document.documentElement.clientHeight * (3 / 5)) - (2.5 * 16)}
+            width="100vw"
+            // height={(document.documentElement.clientHeight * (3 / 5)) - (2.5 * 16)}
             language={this.state.language}
             theme={this.state.theme}
             value={code}
@@ -145,15 +147,13 @@ class App extends React.Component {
         <div className='output'>
           <div className='outputArea'>
             <code>
-              OUTPUT:<br />
-              output: {this.state.output.output}
-              error: {this.state.output.error}
-              stderr: {this.state.output.stderror}
-              <br />
+              output: {this.state.output.output}<br></br>
+              error: {this.state.output.error}<br></br>
+              stderr: {this.state.output.stderror}<br></br>
             </code>
           </div>
         </div>
-        <ReactModal
+        {/* <ReactModal
           isOpen={this.state.showModal}
           contentLabel="onRequestClose Example"
           onRequestClose={this.handleCloseModal}
@@ -174,7 +174,7 @@ class App extends React.Component {
               <Button click={this.handleCloseModal} name="Submit" />
             </form>
           </div>
-        </ReactModal>
+        </ReactModal> */}
       </div>
     );
   }

@@ -31,11 +31,17 @@ func CodeRunner(ctx context.Context, in Input) (Output, error) {
 			filename = "test.js"
 			image = "revoly/jsrunner"
 		}
-	case "golang", "go":
+	case "golang", "go", "GO", "Go":
 		{
 			script = "./rungo.sh"
 			filename = "test.go"
 			image = "revoly/gorunner"
+		}
+	case "py", "python", "python3":
+		{
+			script = "./runpy.sh"
+			filename = "test.py"
+			image = "revoly/pyrunner"
 		}
 	default:
 		{

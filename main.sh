@@ -47,4 +47,10 @@ if [[ "$(docker images -q revoly/gorunner 2> /dev/null)" == "" ]]; then
     docker build -t revoly/gorunner .
     cd ../
 fi
+
+if [[ "$(docker images -q revoly/pyrunner 2> /dev/null)" == "" ]]; then
+    cd goglot/images/python
+    docker build -t revoly/pyrunner .
+    cd ../
+fi
 docker-compose up --scale app1=4 

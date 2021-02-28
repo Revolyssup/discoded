@@ -10,6 +10,7 @@ export default function editorSetting({ getLanguage, getTheme }) {
                 <option>C++</option>
                 <option>C</option>
                 <option>Python3</option>
+                <option>Go</option>
             </select>
             <label className={Classes.controlLabel}>Theme</label>
             <select className={Classes.picker} onChange={getTheme}>
