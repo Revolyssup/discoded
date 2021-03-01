@@ -12,11 +12,7 @@ func p(a interface{}) {
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	var in Input
-	var response Output = Output{
-		Stdout: "",
-		Stderr: "",
-		Err:    "",
-	}
+	var response Output
 	err := json.NewDecoder(r.Body).Decode(&in)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
