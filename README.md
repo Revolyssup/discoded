@@ -68,4 +68,3 @@ to stop the containers.
 
 3. Currently I am load_balancing individual containers hardcoding in nginx which is not very scalable. I plan to offload the load_balancing responsibility to docker-compose so I can give any n number of indentical express server containers without changing nginx configuration, :ballot_box_with_check:
 
-4. Currently I am using plain http to establish communication between express and goglot. I plan to use grpc.
