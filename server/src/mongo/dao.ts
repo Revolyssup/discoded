@@ -73,7 +73,7 @@ export class UserDAO {
             } 
             return null;
       }
-      console.log('serving from redis'+JSON.parse(val));
+      console.log('serving from redis ='+JSON.parse(val));
       return JSON.parse(val);
 
   }

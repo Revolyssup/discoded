@@ -1,9 +1,9 @@
 # **Discoded** [Working currently] but [more features to be added]
-*Discord bot+code editor+GOGLOT code runner*
+*GOGLOT code runner+Discord bot+code editor*
 
 - The discord bot is started as soon as the backend server spins up. The code editor is served as a static react application by nginx.
 
-- The server is split into microservices as a combination of 7 docker containers, one of which is the discord bot, one is nginx reverse proxy,one is the goglot go server where the API calls are made to run the code and other four(you can rescale in main.sh , docker compose is doing the load balancing between containers) are express servers.
+- The server is split into 5 microservices as a combination of 7 docker containers, one of which is the discord bot, one is nginx reverse proxy,one is the goglot go server where the API calls are made to run the code and other four(you can rescale in main.sh , docker compose is doing the load balancing between containers) are express servers.
 ## Snapshot
 
 ![If you're seeing this text means somehow my image got renamed or deleted lol](https://github.com/Revolyssup/discoded/blob/master/demo.png?raw=true)
