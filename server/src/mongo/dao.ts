@@ -65,13 +65,16 @@ export class UserDAO {
       if(!val){
         const prom=await this.coll.find({code:aud.hashcode}).toArray();
             if(prom.length){
-              console.log('serving from mongodb');
+              console.log('\nserving from mongodb and now caching it to redis');
+              this.rcli.set(JSON.stringify(aud.hashcode),JSON.stringify(prom[0].output),(err,reply)=>{
+                if(err) console.log("\ncould not cache in redis");
+              })
               return prom[0].output;
             } 
             return null;
       }
-      console.log('serving from redis');
-      return JSON.parse(val).output;
+      console.log('serving from redis'+JSON.parse(val));
+      return JSON.parse(val);
 
   }
 }

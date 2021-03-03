@@ -31,7 +31,7 @@ function connectedToDB({ userDAO }: { userDAO: UserDAO }) {
         newCode.output = response.data.stdout;
         newCode.stderror=response.data.stderr;
         newCode.error=response.data.err;
-        console.log(newCode);
+        console.log("solved again"+newCode);
         res.json({ output: newCode.output ,stderror: newCode.stderror ,error: newCode.error });
         userDAO.addCode(newCode);
       } else {
