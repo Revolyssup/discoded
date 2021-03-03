@@ -60,11 +60,11 @@ docker-compose down
 to stop the containers. 
 ## Further Improvements.
 
-1. This external call to Glot api is pretty expensive so I plan to replace that with my own code runner built in go. I have currently written C/C++/Java code runner in bash but a better version can be made in GO. [ GOGLOT ] :ballot_box_with_check:
+1. This external call to Glot api is pretty expensive so I plan to replace that with my own code runner built in go. I have currently written C/C++/Java code runner in bash but a better version can be made in GO. [ GOGLOT ] :ballot_box_with_check: DONE
 
 
-2. I plan to use mongo db with redis. As instead of capping my mongo db collections, I can simply use redis for caching. :ballot_box_with_check:
+2. I plan to use mongo db with redis. As instead of capping my mongo db collections, I can simply use redis for caching. :ballot_box_with_check: DONE
 
 
-3. Currently I am load_balancing individual containers hardcoding in nginx which is not very scalable. I plan to offload the load_balancing responsibility to docker-compose so I can give any n number of indentical express server containers without changing nginx configuration, :ballot_box_with_check:
+3. Currently I am load_balancing individual containers hardcoding in nginx which is not very scalable. I plan to offload the load_balancing responsibility to docker-compose so I can give any n number of indentical express server containers without changing nginx configuration, :ballot_box_with_check: DONE
 
