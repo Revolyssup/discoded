@@ -2,7 +2,11 @@ import discord from 'discord.js';
 import botoutput from './commands';
 
 const helper=`
-;code <language name> <standard input> <code>   --- to run code. Keep the code in a string.
+;code 
+<language name> 
+<standard input> 
+<code>   
+--- to run code.NOTE:- Make sure the standard input doesn't have any newline characters
 ;help --- to get list of available commands.
 `
 
@@ -13,7 +17,7 @@ export default async function handlebot(msg: discord.Message){
     if(msg.content.startsWith(prefix) && !msg.author.bot){
 
         
-        let args:string[] = msg.content.slice(prefix.length).trim().split(' ');
+        let args:string[] = msg.content.slice(prefix.length).trim().split('\n');
        
         const command = args.shift();
         const language=args.shift();
@@ -23,7 +27,7 @@ export default async function handlebot(msg: discord.Message){
         console.log(command);
         switch(command){
             case "code":
-                code=args.join(' ');
+                code=args.join('\n');
                 const reply=await botoutput(input,code,language);
                 msg.reply(reply);
                 break;
