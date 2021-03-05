@@ -19,7 +19,8 @@ const client = new MongoClient(uri, {
 const redisclient:RedisClient=redis.createClient({
   host:'redis',
   port:6379,
-  password:'root'
+  password:'root',
+  
 })
 
 // const getfromredis=promisify(redisclient.get).bind(client);
@@ -45,6 +46,7 @@ export class UserDAO {
 
   async addCode(aud: UserDTO) {
     this.rcli.set(JSON.stringify(aud.hashcode),JSON.stringify(aud.output),async (err,reply)=>{
+      this.rcli.expire(JSON.stringify(aud.hashcode),600);
       const prom = await this.coll.insertOne({
         code: aud.hashcode,
         output:aud.output
@@ -52,12 +54,6 @@ export class UserDAO {
       if(!err) console.log("cached in redis");
        return prom;
     })
-    // const prom = await this.coll.insertOne({
-    //   code: aud.hashcode,
-    //   output:aud.output
-    // });
-    // await this.setonredis(JSON.stringify(aud.hashcode),JSON.stringify(aud.output));
-    // return prom;
   }
 
   async checkCode(aud: UserDTO):Promise<string |null>{
@@ -68,6 +64,7 @@ export class UserDAO {
               console.log('\nserving from mongodb and now caching it to redis');
               this.rcli.set(JSON.stringify(aud.hashcode),JSON.stringify(prom[0].output),(err,reply)=>{
                 if(err) console.log("\ncould not cache in redis");
+                else this.rcli.expire(JSON.stringify(aud.hashcode),600);
               })
               return prom[0].output;
             } 
