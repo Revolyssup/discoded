@@ -1,8 +1,8 @@
 import express from "express";
 import bodyParser from "body-parser";
 import solver from './solver';
-import UserDTO from "./mongo/dto";
-import userDAOP, { UserDAO } from "./mongo/dao";
+import UserDTO from "./db/dto";
+import userDAOP, { UserDAO } from "./db/dao";
 const app = express();
 const port = process.env.ID;
 
