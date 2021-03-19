@@ -37,7 +37,7 @@ it creates a container for that language, runs the code, flushes the output and 
 ## How to use?
 
 1. *Discord bot* Create a discord bot application and generate an authentication token. [Create Discord application](https://discord.com/developers/applications). Add that token in the .env file of discordbot directory.
-
+Note:- Discord bot has other features too that you can checkout by ";help" command.
 
 2.  Make sure you have docker installed.
 
