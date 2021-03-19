@@ -78,30 +78,18 @@ export class UserDAO {
   }
 
 async addLyrics(ald:LyricDTO){
-    this.rcli.set(JSON.stringify(ald.name),JSON.stringify(ald.lyrics),async (err,reply)=>{
-      this.rcli.expire(JSON.stringify(ald.name),60);
+   
       const prom=await this.lyrcoll.insertOne({
           name:ald.name,
           lyrics:ald.lyrics
       });
-      if(!err) console.log("\nCould not cache in redis");
       return prom;
-    })
+    
 }
 async checkLyrics(ald:LyricDTO):Promise<string | null>{
-    const lyrics=await this.getfromredis(JSON.stringify(ald.name));
-    if(!lyrics){
       const prom=await this.lyrcoll.find({name:ald.name}).toArray();
-        if(prom.length){
-          this.rcli.set(JSON.stringify(ald.name),JSON.stringify(prom[0].lyrics),(err,reply)=>{
-            if(err) console.log("\ncould not set cache lyrics in redis.");
-            else this.rcli.expire(JSON.stringify(ald.name),600);
-          })
-          return prom[0].lyrics;
-        }
+        if(prom.length) return prom[0].lyrics;
         return null;
-    }
-    return JSON.parse(lyrics);
 }
 
 }
