@@ -33,4 +33,20 @@ class UserDTO{
 
 }
 
+export class LyricDTO{
+    name:string;
+    lyrics:string | null;
+    constructor(obj:any){
+        console.log("printing obj name "+obj.name)
+        this.name=obj.name;
+        this.lyrics=obj.lyrics;
+    }
+
+    validate():Error | null{
+        if(typeof(this.name)!="string"){
+            return new Error("Invalid Song name");
+        }
+        return null;
+    }
+}
 export default UserDTO

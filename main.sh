@@ -1,20 +1,21 @@
 if [[ "$(docker images -q revoly/nginx 2> /dev/null)" == "" ]]; then
     cd client;
+    npm i
     npm run build
     docker build -t revoly/nginx .
     cd ../
 fi
 
 
-if [[ "$(docker images -q revoly/discoded 2> /dev/null)" == "" ]]; then
+if [[ "$(docker images -q revoly/discoded/v2 2> /dev/null)" == "" ]]; then
     cd server
-    docker build -t revoly/discoded .
+    docker build -t revoly/discoded/v2 .
     cd ../
 fi
 
-if [[ "$(docker images -q revoly/discordbot 2> /dev/null)" == "" ]]; then
+if [[ "$(docker images -q revoly/discordbot/v2 2> /dev/null)" == "" ]]; then
     cd discordbot
-    docker build -t revoly/discordbot .
+    docker build -t revoly/discordbot/v2 .
     cd ../
 fi
 

@@ -1,14 +1,15 @@
 import express from "express";
 import bodyParser from "body-parser";
 import solver from './solver';
-import UserDTO from "./db/dto";
+import UserDTO,{LyricDTO} from "./db/dto";
 import userDAOP, { UserDAO } from "./db/dao";
+import {getLyrics} from './lyrics'
 const app = express();
 const port = process.env.ID;
 
 
 let newCode: UserDTO;
-
+let newLyrics: LyricDTO;
 app.use(bodyParser.json());
 
 function connectedToDB({ userDAO }: { userDAO: UserDAO }) {
@@ -44,6 +45,26 @@ function connectedToDB({ userDAO }: { userDAO: UserDAO }) {
   });
 
 
+  app.post("/api/lyrics",async (req,res)=>{
+      newLyrics=new LyricDTO(req.body);
+      if(newLyrics.validate()){
+        res.json({status : "Song name should be string"});
+        return;
+      }
+
+      try{
+        console.log("song to search: "+newLyrics.name)
+        newLyrics.lyrics=await userDAO.checkLyrics(newLyrics);
+        if(!newLyrics.lyrics){
+          newLyrics.lyrics=await getLyrics(newLyrics.name);
+        }
+        console.log("Lyrics: "+newLyrics.lyrics);
+        res.json({lyrics:newLyrics.lyrics});
+        userDAO.addLyrics(newLyrics);
+      }catch(err){
+        console.dir(err);
+      }
+  })
   app.listen(port, () => {
     console.log(`Server listening at ${port}`);
   });
