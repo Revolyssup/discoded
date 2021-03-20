@@ -8,4 +8,5 @@ jobs:
       - name: Build the stack
         run: chmod +x ./main.sh && ./main.sh
       - name: Test
+        uses: actions/setup-node@v1
         run: cd test && npm run test

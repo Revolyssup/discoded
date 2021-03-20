@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {checkJSRunner,checkpyRunner,checkCRunner,checkgoRunner} from './runners'
+import {checkJSRunner,checkpyRunner,checkCRunner,checkgoRunner,checkCppRunner} from './runners'
 
 
 
@@ -23,6 +23,11 @@ describe('Testing all runners',()=>{
         const prom=await checkgoRunner();
         console.log(prom);
         expect(prom.output).to.be.equal("Ashish");
+    })
+    it("Checking cpp RUNNER",async ()=>{
+        const prom=await checkCppRunner();
+        console.log(prom);
+        expect(prom.output).to.be.equal("10");
     })
 })
 

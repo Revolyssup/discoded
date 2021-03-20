@@ -62,3 +62,18 @@ export async function checkgoRunner(){
 
     return prom.data;
 }
+
+export async function checkCppRunner(){
+    const language="cpp";
+    const code="#include<iostream>\nint main(){\n  int a; std::cin>>a; std::cout<<a*2;}";
+    const input="5";
+    const prom= await axios({
+        url:'http://localhost:3000/api/newcode', //docker resolves the dns internal ip by service name. //change it to 8080
+        method:'POST',
+        data:{
+            input, code, language, forcerun:true
+        } 
+    });
+
+    return prom.data;
+}

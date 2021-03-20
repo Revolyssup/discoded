@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.checkgoRunner = exports.checkCRunner = exports.checkpyRunner = exports.checkJSRunner = void 0;
+exports.checkCppRunner = exports.checkgoRunner = exports.checkCRunner = exports.checkpyRunner = exports.checkJSRunner = void 0;
 const axios_1 = __importDefault(require("axios"));
 function checkJSRunner() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -78,3 +78,19 @@ function checkgoRunner() {
     });
 }
 exports.checkgoRunner = checkgoRunner;
+function checkCppRunner() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const language = "cpp";
+        const code = "#include<iostream>\nint main(){\n  int a; std::cin>>a; std::cout<<a*2;}";
+        const input = "5";
+        const prom = yield axios_1.default({
+            url: 'http://localhost:3000/api/newcode',
+            method: 'POST',
+            data: {
+                input, code, language, forcerun: true
+            }
+        });
+        return prom.data;
+    });
+}
+exports.checkCppRunner = checkCppRunner;

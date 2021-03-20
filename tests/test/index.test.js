@@ -32,4 +32,9 @@ describe('Testing all runners', () => {
         console.log(prom);
         chai_1.expect(prom.output).to.be.equal("Ashish");
     }));
+    it("Checking cpp RUNNER", () => __awaiter(void 0, void 0, void 0, function* () {
+        const prom = yield runners_1.checkCppRunner();
+        console.log(prom);
+        chai_1.expect(prom.output).to.be.equal("10");
+    }));
 });
