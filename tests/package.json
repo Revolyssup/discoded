@@ -1,0 +1,25 @@
+{
+  "name": "tests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "tsc && mocha"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chai": "^4.2.15",
+    "@types/mocha": "^8.2.2",
+    "chai": "^4.3.4",
+    "mocha": "^8.3.2",
+    "typescript": "^4.2.3"
+  },
+  "dependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/node-fetch": "^2.5.8",
+    "axios": "^0.21.1",
+    "node-fetch": "^2.6.1"
+  }
+}
