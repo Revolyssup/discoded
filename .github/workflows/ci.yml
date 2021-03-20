@@ -9,4 +9,4 @@ jobs:
       - name: Build the stack
         run: chmod +x ./main.sh && ./main.sh
       - name: Test
-        run: cd test && npm run test
+        run: cd tests && npm run test
