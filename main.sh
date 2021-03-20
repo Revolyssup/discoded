@@ -7,7 +7,7 @@ if [[ "$(docker images -q revoly/nginx 2> /dev/null)" == "" ]]; then
 fi
 
 
-if [[ "$(docker images -q revoly/discoded/v2 2> /dev/null)" == "" ]]; then
+if [[ "$(docker images -q revoly/discoded/v2 2> /dev/null)" == "" ]]; then 
     cd server
     docker build -t revoly/discoded/v2 .
     cd ../
