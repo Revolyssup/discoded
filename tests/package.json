@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "tsc && mocha"
+    "test": "tsc && mocha --slow 0"
   },
   "keywords": [],
   "author": "",
