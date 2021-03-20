@@ -4,9 +4,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2+
+      - uses: actions/setup-node@v1
       - name: Build the stack
         run: chmod +x ./main.sh && ./main.sh
       - name: Test
-        uses: actions/setup-node@v1
         run: cd test && npm run test
