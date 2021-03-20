@@ -26,7 +26,7 @@ describe('Testing all runners',function(){
     })
 })
 
-describe("Testing caching",()=>{
+describe("Testing caching on mongodb and redis",()=>{
     it("Checking caching with python RUNNER",async ()=>{
         const prom=await checkCaching1();
         expect(prom.output).to.be.equal("Ashish\n");
