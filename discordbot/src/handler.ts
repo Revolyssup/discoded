@@ -42,8 +42,6 @@ export default async function handlebot(msg: discord.Message){
                     let i=0;
                     let j=1500;
                     while(j<=lyrics.length){
-                        console.log("i and j "+i+" "+j);
-                        console.log(lyrics.slice(i,j));
                         msg.reply(lyrics.slice(i,j));
                         i=j;
                         j=j+1500;
