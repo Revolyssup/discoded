@@ -32,7 +32,7 @@ fi
 
 if [[ "$(docker images -q revoly/jsrunner 2> /dev/null)" == "" ]]; then
     
-    docker build -t revoly/jsrunner ./goglot/images/js
+    docker pull revoly/jsrunner 
     
 fi
 
