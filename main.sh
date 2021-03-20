@@ -48,4 +48,4 @@ if [[ "$(docker images -q revoly/pyrunner 2> /dev/null)" == "" ]]; then
     docker build -t revoly/pyrunner .
     cd ../
 fi
-docker-compose up --scale app1=4 
+docker-compose up --scale app1=4 -d
