@@ -77,3 +77,34 @@ export async function checkCppRunner(){
 
     return prom.data;
 }
+
+
+export async function checkCaching1(){
+    const language="py";
+    const code="print(\"Ashish\")";
+    const input="";
+    const prom= await axios({
+        url:'http://localhost:3000/api/newcode', 
+        method:'POST',
+        data:{
+            input, code, language
+        } 
+    });
+
+    return prom.data;
+}
+
+export async function checkCaching2(){
+    const language="cpp";
+    const code="#include<iostream>\nint main(){\n  int a; std::cin>>a; std::cout<<a*2;}";
+    const input="5";
+    const prom= await axios({
+        url:'http://localhost:3000/api/newcode', 
+        method:'POST',
+        data:{
+            input, code, language
+        } 
+    });
+
+    return prom.data;
+}

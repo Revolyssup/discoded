@@ -1,9 +1,9 @@
 import {expect} from 'chai';
-import {checkJSRunner,checkpyRunner,checkCRunner,checkgoRunner,checkCppRunner} from './runners'
+import {checkJSRunner,checkpyRunner,checkCRunner,checkgoRunner,checkCppRunner,checkCaching1,checkCaching2} from './runners'
 
 
 
-describe('Testing all runners',()=>{
+describe('Testing all runners',function(){
     it("Checking JS RUNNER",async ()=>{
         const prom=await checkJSRunner();
         console.log(prom);
@@ -28,6 +28,18 @@ describe('Testing all runners',()=>{
         const prom=await checkCppRunner();
         console.log(prom);
         expect(prom.output).to.be.equal("10");
+    })
+    it("Checking caching with python RUNNER",async ()=>{
+        const prom=await checkCaching1();
+        console.log(prom);
+        expect(prom.output).to.be.equal("Ashish\n");
+        this.timeout(100);
+    })
+    it("Checking caching with cpp RUNNER",async ()=>{
+        const prom=await checkCaching2();
+        console.log(prom);
+        expect(prom.output).to.be.equal("10");
+        this.timeout(100);
     })
 })
 

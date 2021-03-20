@@ -1,7 +1,6 @@
 if [[ "$(docker images -q revoly/nginx/test 2> /dev/null)" == "" ]]; then
-    cd client;
-    docker build -t revoly/nginx/test .
-    cd ..
+    
+    docker build -t revoly/nginx/test ./nginx
 fi
 
 

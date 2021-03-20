@@ -1,1 +1,0 @@
-## Experimenting with discord.js to see what all features can be implemented in a discord bot.
