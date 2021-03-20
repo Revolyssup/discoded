@@ -34,7 +34,5 @@ services:
     image: revoly/discoded/v2
     environment:
       - ID=1000
-  
-  app2:
-    image: revoly/discordbot/v2
+
 
