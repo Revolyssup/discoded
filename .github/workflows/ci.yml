@@ -3,11 +3,9 @@ on:
   push:
     branches:
       - "master"
-      - "testing"
   pull_request:
     branches:
       - "master"
-      - "testing"
 jobs:
   test:
     needs: sync
@@ -21,6 +19,7 @@ jobs:
         run:  cd tests && npm i &&npm run test
   sync:
       runs-on: ubuntu-latest
+      if: ${GITHUB_REF##*/} != 'testing'
       steps:
       - uses: actions/checkout@v2
       - name: Synchronize
