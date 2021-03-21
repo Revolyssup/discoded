@@ -13,32 +13,39 @@ const chai_1 = require("chai");
 const runners_1 = require("./runners");
 describe('Testing all runners', function () {
     it("Checking JS RUNNER", () => __awaiter(this, void 0, void 0, function* () {
+        this.retries(5);
         const prom = yield runners_1.checkJSRunner();
         chai_1.expect(prom.output).to.be.equal("Ashish\n");
     }));
     it("Checking Python RUNNER", () => __awaiter(this, void 0, void 0, function* () {
+        this.retries(5);
         const prom = yield runners_1.checkpyRunner();
         chai_1.expect(prom.output).to.be.equal("Ashish\n");
     }));
     it("Checking C RUNNER", () => __awaiter(this, void 0, void 0, function* () {
+        this.retries(5);
         const prom = yield runners_1.checkCRunner();
         chai_1.expect(prom.output).to.be.equal("Ashish 5");
     }));
     it("Checking go RUNNER", () => __awaiter(this, void 0, void 0, function* () {
+        this.retries(5);
         const prom = yield runners_1.checkgoRunner();
         chai_1.expect(prom.output).to.be.equal("Ashish");
     }));
     it("Checking cpp RUNNER", () => __awaiter(this, void 0, void 0, function* () {
+        this.retries(5);
         const prom = yield runners_1.checkCppRunner();
         chai_1.expect(prom.output).to.be.equal("10");
     }));
 });
-describe("Testing caching on mongodb and redis", () => {
-    it("Checking caching with python RUNNER", () => __awaiter(void 0, void 0, void 0, function* () {
+describe("Testing caching on mongodb and redis", function () {
+    it("Checking caching with python RUNNER", () => __awaiter(this, void 0, void 0, function* () {
+        this.retries(5);
         const prom = yield runners_1.checkCaching1();
         chai_1.expect(prom.output).to.be.equal("Ashish\n");
     }));
-    it("Checking caching with cpp RUNNER", () => __awaiter(void 0, void 0, void 0, function* () {
+    it("Checking caching with cpp RUNNER", () => __awaiter(this, void 0, void 0, function* () {
+        this.retries(5);
         const prom = yield runners_1.checkCaching2();
         chai_1.expect(prom.output).to.be.equal("10");
     }));

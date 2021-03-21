@@ -5,27 +5,22 @@ import {checkJSRunner,checkpyRunner,checkCRunner,checkgoRunner,checkCppRunner,ch
 
 describe('Testing all runners',function(){
     it("Checking JS RUNNER",async ()=>{
-        this.retries(5)
         const prom=await checkJSRunner();
         expect(prom.output).to.be.equal("Ashish\n");
     });
     it("Checking Python RUNNER",async ()=>{
-        this.retries(5)
         const prom=await checkpyRunner();
         expect(prom.output).to.be.equal("Ashish\n");
     });
     it("Checking C RUNNER",async ()=>{
-        this.retries(5)
         const prom=await checkCRunner();
         expect(prom.output).to.be.equal("Ashish 5");
     })
     it("Checking go RUNNER",async ()=>{
-        this.retries(5)
         const prom=await checkgoRunner();
         expect(prom.output).to.be.equal("Ashish");
     })
     it("Checking cpp RUNNER",async ()=>{
-        this.retries(5)
         const prom=await checkCppRunner();
         expect(prom.output).to.be.equal("10");
     })
@@ -33,12 +28,10 @@ describe('Testing all runners',function(){
 
 describe("Testing caching on mongodb and redis",function(){
     it("Checking caching with python RUNNER",async ()=>{
-        this.retries(5)
         const prom=await checkCaching1();
         expect(prom.output).to.be.equal("Ashish\n");
     })
     it("Checking caching with cpp RUNNER",async ()=>{
-        this.retries(5)
         const prom=await checkCaching2();
         expect(prom.output).to.be.equal("10");
     })
