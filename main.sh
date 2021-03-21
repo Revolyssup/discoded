@@ -49,4 +49,4 @@ fi
 
 
 
-docker-compose up --scale app1=4 
+docker-compose up --scale app1=4 -d
