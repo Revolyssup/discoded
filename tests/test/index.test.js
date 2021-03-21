@@ -12,10 +12,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const chai_1 = require("chai");
 const runners_1 = require("./runners");
 describe('Testing all runners', function () {
-    it("Checking JS RUNNER", () => __awaiter(this, void 0, void 0, function* () {
-        const prom = yield runners_1.checkJSRunner();
-        chai_1.expect(prom.output).to.be.equal("Ashish\n");
-    }));
+    // it("Checking JS RUNNER",async ()=>{
+    //     const prom=await checkJSRunner();
+    //     expect(prom.output).to.be.equal("Ashish\n");
+    // });
     it("Checking Python RUNNER", () => __awaiter(this, void 0, void 0, function* () {
         const prom = yield runners_1.checkpyRunner();
         chai_1.expect(prom.output).to.be.equal("Ashish\n");
@@ -33,7 +33,7 @@ describe('Testing all runners', function () {
         chai_1.expect(prom.output).to.be.equal("10");
     }));
 });
-describe("Testing caching", () => {
+describe("Testing caching on mongodb and redis", () => {
     it("Checking caching with python RUNNER", () => __awaiter(void 0, void 0, void 0, function* () {
         const prom = yield runners_1.checkCaching1();
         chai_1.expect(prom.output).to.be.equal("Ashish\n");
