@@ -4,10 +4,10 @@ import {checkJSRunner,checkpyRunner,checkCRunner,checkgoRunner,checkCppRunner,ch
 
 
 describe('Testing all runners',function(){
-    // it("Checking JS RUNNER",async ()=>{
-    //     const prom=await checkJSRunner();
-    //     expect(prom.output).to.be.equal("Ashish\n");
-    // });
+    it("Checking JS RUNNER",async ()=>{
+        const prom=await checkJSRunner();
+        expect(prom.output).to.be.equal("Ashish\n");
+    });
     it("Checking Python RUNNER",async ()=>{
         const prom=await checkpyRunner();
         expect(prom.output).to.be.equal("Ashish\n");
