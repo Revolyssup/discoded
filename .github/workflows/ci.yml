@@ -1,5 +1,13 @@
 name: Docker Compose Actions Workflow
-on: [push, pull_request]
+on: 
+  push:
+    branches:
+      - "master"
+      - "testing"
+  pull_request:
+    branches:
+      - "master"
+      - "testing"
 jobs:
   test:
     needs: sync

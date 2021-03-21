@@ -1,5 +1,3 @@
-
-
 if [[ "$(docker images -q revoly/nginx/test 2> /dev/null)" == "" ]]; then
     
     docker build -t revoly/nginx/test ./nginx

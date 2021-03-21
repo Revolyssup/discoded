@@ -1,3 +1,4 @@
+git checkout testing
 git checkout master -- server
 git checkout master -- goglot
 git add server
