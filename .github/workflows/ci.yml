@@ -2,6 +2,7 @@ name: Docker Compose Actions Workflow
 on: [push, pull_request]
 jobs:
   test:
+    needs: sync
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -10,3 +11,9 @@ jobs:
         run: chmod +x ./main.sh && ./main.sh
       - name: Test
         run:  cd tests && npm i &&npm run test
+  sync:
+      runs-on: ubuntu-latest
+      steps:
+      - uses: actions/checkout@v2
+      - name: Synchronize
+        run: chmod +x ./sync.sh && ./sync.sh
