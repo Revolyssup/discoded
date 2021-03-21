@@ -47,7 +47,6 @@ export class UserDAO {
   }
 
   async addCode(aud: UserDTO) {
-    if(aud.forcerun) return; // Do not involve database
     this.rcli.set(JSON.stringify(aud.hashcode),JSON.stringify(aud.output),async (err,reply)=>{
       this.rcli.expire(JSON.stringify(aud.hashcode),600);
       const prom = await this.coll.insertOne({
@@ -60,7 +59,6 @@ export class UserDAO {
   }
 
   async checkCode(aud: UserDTO):Promise<string |null>{
-      if(aud.forcerun) return null; //User doesn't want cached value. I am doing this for test scripts.
       const val=await this.getfromredis(JSON.stringify(aud.hashcode));
       if(!val){
         const prom=await this.coll.find({code:aud.hashcode}).toArray();

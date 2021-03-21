@@ -53,10 +53,12 @@ function connectedToDB({ userDAO }: { userDAO: UserDAO }) {
       }
 
       try{
+        console.log("song to search: "+newLyrics.name)
         newLyrics.lyrics=await userDAO.checkLyrics(newLyrics);
         if(!newLyrics.lyrics){
           newLyrics.lyrics=await getLyrics(newLyrics.name);
         }
+        console.log("Lyrics: "+newLyrics.lyrics);
         res.json({lyrics:newLyrics.lyrics});
         userDAO.addLyrics(newLyrics);
       }catch(err){
