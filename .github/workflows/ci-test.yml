@@ -1,0 +1,18 @@
+name: Docker Compose Actions Workflow
+on: 
+  push:
+    branches:
+      - "testing"
+  pull_request:
+    branches:
+      - "testing"
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+      - name: Build the stack
+        run: chmod +x ./main.sh && ./main.sh
+      - name: Test
+        run:  cd tests && npm i &&npm run test

@@ -1,0 +1,17 @@
+name: Docker Compose Actions Workflow
+on: 
+  push:
+    branches:
+      - "master"
+  pull_request:
+    branches:
+      - "master"
+      
+jobs:
+  sync:
+      runs-on: ubuntu-latest
+
+      steps:
+      - uses: actions/checkout@v2
+      - name: Synchronize
+        run: chmod +x ./sync.sh && ./sync.sh
