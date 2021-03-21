@@ -14,9 +14,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.checkCaching2 = exports.checkCaching1 = exports.checkCppRunner = exports.checkgoRunner = exports.checkCRunner = exports.checkpyRunner = exports.checkJSRunner = void 0;
 const retry_1 = __importDefault(require("./retry"));
+const axios = retry_1.default(10, 10000);
 function checkJSRunner() {
     return __awaiter(this, void 0, void 0, function* () {
-        const axios = retry_1.default(5, 10000);
         const language = "js";
         const code = "console.log(\"Ashish\")";
         const input = "";
@@ -33,7 +33,6 @@ function checkJSRunner() {
 exports.checkJSRunner = checkJSRunner;
 function checkpyRunner() {
     return __awaiter(this, void 0, void 0, function* () {
-        const axios = retry_1.default(5, 10000);
         const language = "py";
         const code = "print(\"Ashish\")";
         const input = "";
@@ -50,7 +49,6 @@ function checkpyRunner() {
 exports.checkpyRunner = checkpyRunner;
 function checkCRunner() {
     return __awaiter(this, void 0, void 0, function* () {
-        const axios = retry_1.default(5, 10000);
         const language = "c";
         const code = "#include<stdio.h>\nint main(){\n  int a; scanf(\"%d\",&a); printf(\"Ashish %d\",a);}";
         const input = "5";
@@ -67,7 +65,6 @@ function checkCRunner() {
 exports.checkCRunner = checkCRunner;
 function checkgoRunner() {
     return __awaiter(this, void 0, void 0, function* () {
-        const axios = retry_1.default(5, 10000);
         const language = "go";
         const code = "package main \n import \"fmt\" \n func main(){ \n var s string \nfmt.Scanf(\"%s\",&s) \n fmt.Printf(\"%s\",s)   \n }";
         const input = "Ashish";
@@ -84,7 +81,6 @@ function checkgoRunner() {
 exports.checkgoRunner = checkgoRunner;
 function checkCppRunner() {
     return __awaiter(this, void 0, void 0, function* () {
-        const axios = retry_1.default(5, 10000);
         const language = "cpp";
         const code = "#include<iostream>\nint main(){\n  int a; std::cin>>a; std::cout<<a*2;}";
         const input = "5";
@@ -101,7 +97,6 @@ function checkCppRunner() {
 exports.checkCppRunner = checkCppRunner;
 function checkCaching1() {
     return __awaiter(this, void 0, void 0, function* () {
-        const axios = retry_1.default(5, 10000);
         const language = "py";
         const code = "print(\"Ashish\")";
         const input = "";
@@ -118,7 +113,6 @@ function checkCaching1() {
 exports.checkCaching1 = checkCaching1;
 function checkCaching2() {
     return __awaiter(this, void 0, void 0, function* () {
-        const axios = retry_1.default(5, 10000);
         const language = "cpp";
         const code = "#include<iostream>\nint main(){\n  int a; std::cin>>a; std::cout<<a*2;}";
         const input = "5";

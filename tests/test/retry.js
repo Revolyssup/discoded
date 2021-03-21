@@ -14,21 +14,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = __importDefault(require("axios"));
 function AxiosWithRetries(limit = 5, sleep = 100) {
-    let currentTry = 1;
-    return function internal(config) {
+    return function (config) {
         return __awaiter(this, void 0, void 0, function* () {
-            return new Promise((resolve, reject) => {
-                axios_1.default(config).then(res => resolve(res)).catch(err => {
-                    console.error("[ERROR WITH REQUESTS]");
-                    if (++currentTry > limit) {
-                        reject(err);
-                        return;
-                    }
-                    setTimeout(() => {
-                        internal(config).then(res => resolve(res)).catch(err => reject(err));
-                    }, sleep);
+            let currentTry = 1;
+            return (function _internal(config) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    return new Promise((resolve, reject) => {
+                        axios_1.default(config).then(res => resolve(res)).catch(err => {
+                            console.error("[ERROR WITH REQUESTS]");
+                            if (++currentTry > limit) {
+                                reject(err);
+                                return;
+                            }
+                            setTimeout(() => {
+                                _internal(config).then(res => resolve(res)).catch(err => reject(err));
+                            }, sleep);
+                        });
+                    });
                 });
-            });
+            })(config);
         });
     };
 }
