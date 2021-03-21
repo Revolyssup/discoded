@@ -1,8 +1,8 @@
 import AxiosWithRetries from "./retry"
 
-export async function checkJSRunner(){
-    const axios = AxiosWithRetries(10, 10000);
+const axios = AxiosWithRetries(10, 10000);
 
+export async function checkJSRunner(){
     const language="js";
     const code="console.log(\"Ashish\")";
     const input="";
@@ -19,8 +19,6 @@ export async function checkJSRunner(){
 
 
 export async function checkpyRunner(){
-    const axios = AxiosWithRetries(10, 10000);
-
     const language="py";
     const code="print(\"Ashish\")";
     const input="";
@@ -36,8 +34,6 @@ export async function checkpyRunner(){
 }
 
 export async function checkCRunner(){
-    const axios = AxiosWithRetries(10, 10000);
-
     const language="c";
     const code="#include<stdio.h>\nint main(){\n  int a; scanf(\"%d\",&a); printf(\"Ashish %d\",a);}";
     const input="5";
@@ -53,8 +49,6 @@ export async function checkCRunner(){
 }
 
 export async function checkgoRunner(){
-    const axios = AxiosWithRetries(10, 10000);
-
     const language="go";
     const code="package main \n import \"fmt\" \n func main(){ \n var s string \nfmt.Scanf(\"%s\",&s) \n fmt.Printf(\"%s\",s)   \n }";
     const input="Ashish";
@@ -70,8 +64,6 @@ export async function checkgoRunner(){
 }
 
 export async function checkCppRunner(){
-    const axios = AxiosWithRetries(10, 10000);
-
     const language="cpp";
     const code="#include<iostream>\nint main(){\n  int a; std::cin>>a; std::cout<<a*2;}";
     const input="5";
@@ -88,8 +80,6 @@ export async function checkCppRunner(){
 
 
 export async function checkCaching1(){
-    const axios = AxiosWithRetries(10, 10000);
-
     const language="py";
     const code="print(\"Ashish\")";
     const input="";
@@ -105,8 +95,6 @@ export async function checkCaching1(){
 }
 
 export async function checkCaching2(){
-    const axios = AxiosWithRetries(10, 10000);
-
     const language="cpp";
     const code="#include<iostream>\nint main(){\n  int a; std::cin>>a; std::cout<<a*2;}";
     const input="5";
