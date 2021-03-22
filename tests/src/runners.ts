@@ -10,7 +10,7 @@ export async function checkJSRunner(){
         url:'http://localhost:3000/api/newcode', 
         method:'POST',
         data:{
-            input, code, language, forcerun:true
+            input, code, language
         } 
     });
 
@@ -26,7 +26,7 @@ export async function checkpyRunner(){
         url:'http://localhost:3000/api/newcode', 
         method:'POST',
         data:{
-            input, code, language, forcerun:true
+            input, code, language
         } 
     });
 
@@ -41,7 +41,7 @@ export async function checkCRunner(){
         url:'http://localhost:3000/api/newcode', 
         method:'POST',
         data:{
-            input, code, language, forcerun:true
+            input, code, language
         } 
     });
 
@@ -56,7 +56,7 @@ export async function checkgoRunner(){
         url:'http://localhost:3000/api/newcode', 
         method:'POST',
         data:{
-            input, code, language, forcerun:true
+            input, code, language
         } 
     });
 
@@ -71,7 +71,7 @@ export async function checkCppRunner(){
         url:'http://localhost:3000/api/newcode', 
         method:'POST',
         data:{
-            input, code, language, forcerun:true
+            input, code, language
         } 
     });
 

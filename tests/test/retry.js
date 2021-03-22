@@ -21,7 +21,7 @@ function AxiosWithRetries(limit = 5, sleep = 100) {
                 return __awaiter(this, void 0, void 0, function* () {
                     return new Promise((resolve, reject) => {
                         axios_1.default(config).then(res => resolve(res)).catch(err => {
-                            console.error("[ERROR WITH REQUESTS]");
+                            console.error("[ERROR WITH REQUEST]");
                             if (++currentTry > limit) {
                                 reject(err);
                                 return;
@@ -37,3 +37,4 @@ function AxiosWithRetries(limit = 5, sleep = 100) {
     };
 }
 exports.default = AxiosWithRetries;
+//Copyrights to this retry wrapper-Utkarsh Srivastava
