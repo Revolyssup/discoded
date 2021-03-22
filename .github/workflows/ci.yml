@@ -1,4 +1,4 @@
-name: Docker Compose Actions Workflow
+name: Synchronizing master with testing branch.
 on: 
   push:
     branches:
