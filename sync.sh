@@ -3,7 +3,6 @@ git config --global user.name "Ashish test"
 git checkout testing
 git checkout master -- server
 git checkout master -- goglot
-git add server
-git add goglot
+git add .
 git commit -m "synchronized goglot and server from master."
 git push
