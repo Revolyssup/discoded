@@ -8,11 +8,12 @@ import UpperTab from "./components/upperTab/upperTab";
 
 ReactModal.setAppElement('#root');
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      code: '// type your code...',
+      code: 'console.log("You are using goglot code runner!") ',
       language: 'javascript',
       theme: 'vs-dark',
       output: '',
@@ -28,6 +29,55 @@ class App extends React.Component {
     editor.focus();
   }
 
+  //takes a default language and set up some boilerplate
+  defaultCode=(language)=>{
+    let code=' '
+    switch (language){
+      case 'cpp':{
+        code=`#include<iostream>
+
+
+        int main(){
+          std::cout<<"You are running goglot code runner";
+        }
+        `
+        break;
+      }
+      case 'c':{
+        code=`#include<stdio.h>
+
+        int main(){
+          printf("You are using goglot code runner");
+        }
+        `
+        break;
+      }
+      case 'go':{
+        code=`package main
+        import "fmt"
+
+        func main(){
+          fmt.Printf("You are using goglot code runner")
+        }
+        `
+        break;
+      }
+
+      case 'python':{
+        code=`print("You are using goglot code runner")`
+        break;
+      }
+
+      case 'javascript':{
+        code=`console.log("You are using goglot code runner")`
+        break;
+      }
+      default:{code=`//Welcome to goglot.`}
+      
+    }
+
+    return code;
+  }
   // Make the language compliant to the backend needs
   getLanguage = (event) => {
     let language;
@@ -41,7 +91,9 @@ class App extends React.Component {
       language = 'python';
     else if (event.target.value === 'Go')
       language = 'go';
-    this.setState({ language })
+    this.setState({ language ,code:this.defaultCode(language)})
+
+
   }
 
   // Set the theme of the editor using this function
