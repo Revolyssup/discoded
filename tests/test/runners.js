@@ -24,7 +24,7 @@ function checkJSRunner() {
             url: 'http://localhost:3000/api/newcode',
             method: 'POST',
             data: {
-                input, code, language, forcerun: true
+                input, code, language
             }
         });
         return prom.data;
@@ -40,7 +40,7 @@ function checkpyRunner() {
             url: 'http://localhost:3000/api/newcode',
             method: 'POST',
             data: {
-                input, code, language, forcerun: true
+                input, code, language
             }
         });
         return prom.data;
@@ -56,7 +56,7 @@ function checkCRunner() {
             url: 'http://localhost:3000/api/newcode',
             method: 'POST',
             data: {
-                input, code, language, forcerun: true
+                input, code, language
             }
         });
         return prom.data;
@@ -72,7 +72,7 @@ function checkgoRunner() {
             url: 'http://localhost:3000/api/newcode',
             method: 'POST',
             data: {
-                input, code, language, forcerun: true
+                input, code, language
             }
         });
         return prom.data;
@@ -88,7 +88,7 @@ function checkCppRunner() {
             url: 'http://localhost:3000/api/newcode',
             method: 'POST',
             data: {
-                input, code, language, forcerun: true
+                input, code, language
             }
         });
         return prom.data;
