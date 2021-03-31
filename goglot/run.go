@@ -54,6 +54,5 @@ func CodeRunner(ctx context.Context, in Input) (Output, error) {
 	}
 	out.Stdout = stdout
 	out.Stderr = stderr
-	p(out)
 	return out, err
 }
