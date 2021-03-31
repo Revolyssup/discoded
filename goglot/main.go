@@ -6,6 +6,8 @@ import (
 	"net/http"
 )
 
+var track TrackCont
+
 func p(a interface{}) {
 	fmt.Printf("\nPrinting.. %+#v of type %T\n", a, a)
 }
@@ -19,6 +21,9 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	p(in)
+	if in.Language == "postgres" {
+
+	}
 	response, err = CodeRunner(r.Context(), in)
 	if err != nil {
 		response.Err = err.Error()
@@ -35,8 +40,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	p("Executing go code!")
+	track.SpinLRC()
 	http.HandleFunc("/", handler)
-
 	err := http.ListenAndServe(":5000", nil)
 	if err != nil {
 		fmt.Println(err)

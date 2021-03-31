@@ -112,3 +112,50 @@ func stopContainer(cli *client.Client, containerID string, stopch chan<- int) {
 		stopch <- 1
 	}
 }
+
+func (track *TrackCont) SpinLRC() {
+	cli, err := client.NewEnvClient()
+	lrcs := []string{"postgres"}
+	if err != nil {
+		fmt.Println("Unable to create docker client")
+		panic(err)
+	}
+	hostBinding := nat.PortBinding{
+		HostIP:   "0.0.0.0",
+		HostPort: "8000",
+	}
+	containerPort, err := nat.NewPort("tcp", "81")
+	if err != nil {
+		fmt.Println("Unable to get the port")
+	}
+	portBinding := nat.PortMap{containerPort: []nat.PortBinding{hostBinding}}
+
+	//starting all the long running containers.
+	for i := 0; i < len(lrcs); i++ {
+		cont, errstrt := cli.ContainerCreate(
+			context.TODO(),
+			&container.Config{
+				Image:        "revoly/pgrunner",
+				Tty:          false,
+				AttachStderr: true,
+				AttachStdin:  true,
+				AttachStdout: true,
+			},
+			&container.HostConfig{
+				PortBindings: portBinding,
+			}, nil, nil, "")
+		track.ContIDs["postgres"] = cont.ID
+		if errstrt != nil {
+			fmt.Println(err)
+		}
+
+		err = cli.ContainerStart(context.TODO(), cont.ID, types.ContainerStartOptions{})
+		if err != nil {
+			fmt.Printf("error starting container: %s\n", err)
+			panic("Could not start the container")
+		}
+
+		fmt.Printf("Container %s is started", cont.ID)
+	}
+
+}
