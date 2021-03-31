@@ -25,7 +25,7 @@ function connectedToDB({ userDAO }: { userDAO: UserDAO }) {
     }
 
     try {
-      newCode.output = await userDAO.checkCode(newCode);
+      if(!newCode.forcerun) newCode.output = await userDAO.checkCode(newCode); // Avoid database checks if forcerun is true;
       if (!newCode.output) {
         const response = await solver(newCode.language, newCode.code, newCode.input)
         newCode.output = response.data.stdout;
@@ -33,6 +33,7 @@ function connectedToDB({ userDAO }: { userDAO: UserDAO }) {
         newCode.error=response.data.err;
         console.log("solved again"+newCode);
         res.json({ output: newCode.output ,stderror: newCode.stderror ,error: newCode.error });
+        if(newCode.forcerun) return; //Do not cache
         userDAO.addCode(newCode);
       } else {
         console.log("sending cached output");

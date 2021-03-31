@@ -9,12 +9,14 @@ class UserDTO{
     hashcode:string;
     error:string='';
     stderror:string='';
+    forcerun:boolean=false;
     constructor(obj:any){
         this.output=obj.output
         this.code=obj.code;
         this.input=obj.input;
         this.language=obj.language
         this.hashcode=codehash(this.code,this.input);
+        if(obj.forcerun) this.forcerun=true;
     }
 
     validate():Error | null{
