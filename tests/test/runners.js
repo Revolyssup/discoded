@@ -50,7 +50,7 @@ exports.checkpyRunner = checkpyRunner;
 function checkCRunner() {
     return __awaiter(this, void 0, void 0, function* () {
         const language = "c";
-        const code = "#include<stdio.h>\nint main(){\n  int a; scanf(\"%d\",&a); printf(\"Ashish %d\",a);}";
+        const code = "#include<stdio.h>\nint main(){\n  while(1){}}";
         const input = "5";
         const prom = yield axios({
             url: 'http://localhost:3000/api/newcode',
