@@ -122,9 +122,9 @@ func (track *TrackCont) SpinLRC() {
 	}
 	hostBinding := nat.PortBinding{
 		HostIP:   "0.0.0.0",
-		HostPort: "8000",
+		HostPort: "8001",
 	}
-	containerPort, err := nat.NewPort("tcp", "81")
+	containerPort, err := nat.NewPort("tcp", "80")
 	if err != nil {
 		fmt.Println("Unable to get the port")
 	}
