@@ -12,6 +12,7 @@ func CodeRunner(ctx context.Context, in Input) (Output, error) {
 	var script string
 	var filename string
 	var image string
+	var lrc bool = false
 	switch in.Language {
 	case "cpp":
 		{
@@ -43,17 +44,33 @@ func CodeRunner(ctx context.Context, in Input) (Output, error) {
 			filename = "test.py"
 			image = "revoly/pyrunner"
 		}
+	case "postgres", "pg":
+		{
+			script = "./pg.sh"
+			filename = "" //no use here
+			image = "revoly/pgrunner"
+			lrc = true
+		}
 	default:
 		{
 			return out, errors.New("Invalid Language")
 		}
 	}
-	stdout, stderr, err := CreateNewContainer(ctx, image, in.Code, in.Input, script, filename)
-	if err != nil {
-		fmt.Println(err)
+	if !lrc {
+		stdout, stderr, err := CreateNewContainer(ctx, image, in.Code, in.Input, script, filename)
+		if err != nil {
+			fmt.Println(err)
+		}
+		out.Stdout = stdout
+		out.Stderr = stderr
+		p(out)
+		return out, err
+	} else {
+		output := RunLRC(ctx, image, in.Code, in.Input, script, in.Language)
+		out.Stdout = output
+		out.Stderr = ""
+		p(out)
+		return out, nil
 	}
-	out.Stdout = stdout
-	out.Stderr = stderr
-	p(out)
-	return out, err
+
 }

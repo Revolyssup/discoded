@@ -24,7 +24,7 @@ services:
           - ./redisdata:/var/lib/redis
         
   goglot:
-    image: revoly/goglot
+    image: revoly/goglot/test
     ports:
       - 5000:5000
     volumes:

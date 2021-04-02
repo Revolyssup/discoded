@@ -38,7 +38,7 @@ func CreateNewContainer(ctx context.Context, image string, code string, input st
 		ctx,
 		&container.Config{
 			Image:        image,
-			Cmd:          []string{script, input, code, filename},
+			Cmd:          []string{script, input, code, filename}, //By convention, $1=input, $2=code, $3=filename
 			Tty:          false,
 			AttachStderr: true,
 			AttachStdin:  true,
@@ -60,8 +60,8 @@ func CreateNewContainer(ctx context.Context, image string, code string, input st
 	fmt.Printf("Container %s is started", cont.ID)
 
 	stopch := make(chan int)
-	// if the container exceeds the time limit
-	go stopContainer(cli, cont.ID, stopch)
+	// if the container exceeds the time limit given here as 3 seconds
+	go stopContainer(cli, cont.ID, stopch, 3)
 
 	//wait untill the container stops
 	statusCh, errCh := cli.ContainerWait(ctx, cont.ID, container.WaitConditionNotRunning)
@@ -102,8 +102,9 @@ func CreateNewContainer(ctx context.Context, image string, code string, input st
 	return stdout, stderr, nil
 }
 
-func stopContainer(cli *client.Client, containerID string, stopch chan<- int) {
-	time.Sleep(3 * time.Second)
+//timeout is in seconds
+func stopContainer(cli *client.Client, containerID string, stopch chan<- int, timeout time.Duration) {
+	time.Sleep(timeout * time.Second)
 	err := cli.ContainerStop(context.TODO(), containerID, nil)
 	if err != nil {
 		//maybe the container exited normally or the TLE occurred
@@ -113,29 +114,41 @@ func stopContainer(cli *client.Client, containerID string, stopch chan<- int) {
 	}
 }
 
-func (track *TrackCont) SpinLRC() {
+func RunLRC(ctx context.Context, image string, code string, input string, script string, language string) string {
 	cli, err := client.NewEnvClient()
-	lrcs := []string{"postgres"}
 	if err != nil {
 		fmt.Println("Unable to create docker client")
 		panic(err)
 	}
-	hostBinding := nat.PortBinding{
-		HostIP:   "0.0.0.0",
-		HostPort: "8001",
-	}
-	containerPort, err := nat.NewPort("tcp", "80")
+	res, err := cli.ContainerExecCreate(ctx, track.ContIDs[language], types.ExecConfig{Privileged: true, AttachStdin: true, AttachStdout: true, Cmd: []string{script, input, code}})
+	return res.ID
+}
+
+//Spin the long running containers when goglot spins up.
+func (track *TrackCont) SpinLRC() {
+	indexCont := []string{"postgres"}
+	indexImage := []string{"revoly/pgrunner"}
+	cli, err := client.NewEnvClient()
 	if err != nil {
-		fmt.Println("Unable to get the port")
+		fmt.Println("Unable to create docker client")
+		panic(err)
 	}
-	portBinding := nat.PortMap{containerPort: []nat.PortBinding{hostBinding}}
 
 	//starting all the long running containers.
-	for i := 0; i < len(lrcs); i++ {
+	for i := 0; i < len(indexCont); i++ {
+		hostBinding := nat.PortBinding{
+			HostIP:   "0.0.0.0",
+			HostPort: fmt.Sprint(8000 + i),
+		}
+		containerPort, err := nat.NewPort("tcp", "80")
+		if err != nil {
+			fmt.Println("Unable to get the port")
+		}
+		portBinding := nat.PortMap{containerPort: []nat.PortBinding{hostBinding}}
 		cont, errstrt := cli.ContainerCreate(
 			context.TODO(),
 			&container.Config{
-				Image:        "revoly/pgrunner",
+				Image:        indexImage[i],
 				Tty:          false,
 				AttachStderr: true,
 				AttachStdin:  true,
@@ -144,7 +157,7 @@ func (track *TrackCont) SpinLRC() {
 			&container.HostConfig{
 				PortBindings: portBinding,
 			}, nil, nil, "")
-		track.ContIDs["postgres"] = cont.ID
+		track.ContIDs[indexCont[i]] = cont.ID
 		if errstrt != nil {
 			fmt.Println(err)
 		}
@@ -156,6 +169,9 @@ func (track *TrackCont) SpinLRC() {
 		}
 
 		fmt.Printf("Container %s is started", cont.ID)
+
+		//To stop the container after 30 minutes
+		go stopContainer(cli, track.ContIDs[indexCont[i]], nil, 30*60)
 	}
 
 }

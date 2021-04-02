@@ -18,9 +18,9 @@ if [[ "$(docker images -q revoly/discordbot 2> /dev/null)" == "" ]]; then
     cd ../
 fi
 
-if [[ "$(docker images -q revoly/goglot 2> /dev/null)" == "" ]]; then
+if [[ "$(docker images -q revoly/goglot/test 2> /dev/null)" == "" ]]; then
     cd goglot
-    docker build -t revoly/goglot .
+    docker build -t revoly/goglot/test .
     cd ../
 fi
 
