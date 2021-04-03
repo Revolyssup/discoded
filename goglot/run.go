@@ -67,6 +67,7 @@ func CodeRunner(ctx context.Context, in Input) (Output, error) {
 		return out, err
 	} else {
 		output := RunLRC(ctx, image, in.Code, in.Input, script, in.Language)
+		fmt.Println("The output from RUNLRC " + output)
 		out.Stdout = output
 		out.Stderr = ""
 		p(out)

@@ -40,6 +40,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	p("Executing go code!")
+	track.ContIDs = map[string]string{}
 	track.SpinLRC()
 	http.HandleFunc("/", handler)
 	err := http.ListenAndServe(":5000", nil)

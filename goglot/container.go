@@ -121,6 +121,7 @@ func RunLRC(ctx context.Context, image string, code string, input string, script
 		panic(err)
 	}
 	res, err := cli.ContainerExecCreate(ctx, track.ContIDs[language], types.ExecConfig{Privileged: true, AttachStdin: true, AttachStdout: true, Cmd: []string{script, input, code}})
+	fmt.Println("The output from res.Id " + res.ID)
 	return res.ID
 }
 
@@ -136,6 +137,7 @@ func (track *TrackCont) SpinLRC() {
 
 	//starting all the long running containers.
 	for i := 0; i < len(indexCont); i++ {
+		fmt.Println("container name: " + indexCont[i])
 		hostBinding := nat.PortBinding{
 			HostIP:   "0.0.0.0",
 			HostPort: fmt.Sprint(8000 + i),
