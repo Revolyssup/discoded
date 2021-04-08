@@ -37,4 +37,3 @@ function AxiosWithRetries(limit = 5, sleep = 100) {
     };
 }
 exports.default = AxiosWithRetries;
-//Copyrights to this retry wrapper-Utkarsh Srivastava

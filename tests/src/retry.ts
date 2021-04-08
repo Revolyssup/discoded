@@ -23,5 +23,3 @@ export default function AxiosWithRetries(limit: number = 5, sleep: number = 100)
         })(config)
     }
 }
-
-//Copyrights to this retry wrapper-Utkarsh Srivastava

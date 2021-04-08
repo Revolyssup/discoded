@@ -12,9 +12,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.checkCaching2 = exports.checkCaching1 = exports.checkCppRunner = exports.checkgoRunner = exports.checkCRunner = exports.checkpyRunner = exports.checkJSRunner = void 0;
+exports.checkTimeout = exports.checkCaching2 = exports.checkCaching1 = exports.checkCppRunner = exports.checkgoRunner = exports.checkpyRunner = exports.checkJSRunner = exports.checkCRunner = void 0;
 const retry_1 = __importDefault(require("./retry"));
 const axios = retry_1.default(10, 10000);
+function checkCRunner() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const language = "c";
+        const code = "#include<stdio.h>\nint main(){\n  int a; scanf(\"%d\",&a); printf(\"Ashish %d\",a);}";
+        const input = "5";
+        const prom = yield axios({
+            url: 'http://localhost:3000/api/newcode',
+            method: 'POST',
+            data: {
+                input, code, language
+            }
+        });
+        return prom.data;
+    });
+}
+exports.checkCRunner = checkCRunner;
 function checkJSRunner() {
     return __awaiter(this, void 0, void 0, function* () {
         const language = "js";
@@ -47,22 +63,6 @@ function checkpyRunner() {
     });
 }
 exports.checkpyRunner = checkpyRunner;
-function checkCRunner() {
-    return __awaiter(this, void 0, void 0, function* () {
-        const language = "c";
-        const code = "#include<stdio.h>\nint main(){\n  while(1){}}";
-        const input = "5";
-        const prom = yield axios({
-            url: 'http://localhost:3000/api/newcode',
-            method: 'POST',
-            data: {
-                input, code, language
-            }
-        });
-        return prom.data;
-    });
-}
-exports.checkCRunner = checkCRunner;
 function checkgoRunner() {
     return __awaiter(this, void 0, void 0, function* () {
         const language = "go";
@@ -127,3 +127,19 @@ function checkCaching2() {
     });
 }
 exports.checkCaching2 = checkCaching2;
+function checkTimeout() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const language = "cpp";
+        const code = "#include<iostream>\nint main(){\n while(1){}}";
+        const input = "5";
+        const prom = yield axios({
+            url: 'http://localhost:3000/api/newcode',
+            method: 'POST',
+            data: {
+                input, code, language
+            }
+        });
+        return prom.data;
+    });
+}
+exports.checkTimeout = checkTimeout;

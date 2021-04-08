@@ -43,3 +43,9 @@ describe("Testing caching on mongodb and redis", function () {
         chai_1.expect(prom.output).to.be.equal("10");
     }));
 });
+describe("Testing Timeouts", function () {
+    it("Checking caching with cpp RUNNER", () => __awaiter(this, void 0, void 0, function* () {
+        const prom = yield runners_1.checkTimeout();
+        chai_1.expect(prom.error).to.be.equal("Time limit exceeded");
+    }));
+});

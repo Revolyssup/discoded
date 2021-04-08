@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {checkJSRunner,checkpyRunner,checkCRunner,checkgoRunner,checkCppRunner,checkCaching1,checkCaching2} from './runners'
+import {checkJSRunner,checkpyRunner,checkCRunner,checkgoRunner,checkCppRunner,checkCaching1,checkCaching2,checkTimeout} from './runners'
 
 
 
@@ -34,5 +34,12 @@ describe("Testing caching on mongodb and redis",function(){
     it("Checking caching with cpp RUNNER",async ()=>{
         const prom=await checkCaching2();
         expect(prom.output).to.be.equal("10");
+    })
+})
+
+describe("Testing Timeouts",function(){
+    it("Checking caching with cpp RUNNER",async ()=>{
+        const prom=await checkTimeout();
+        expect(prom.error).to.be.equal("Time limit exceeded");
     })
 })
