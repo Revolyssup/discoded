@@ -15,7 +15,7 @@ class UserDTO{
         this.code=obj.code;
         this.input=obj.input;
         this.language=obj.language
-        this.hashcode=codehash(this.code,this.input);
+        this.hashcode=codehash(this.code,this.input,this.language);
         if(obj.forcerun) this.forcerun=true;
     }
 
