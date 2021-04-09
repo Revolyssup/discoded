@@ -14,7 +14,7 @@
 
 ## How does it work?
 
-![If you're seeing this text means somehow my image got renamed or deleted lol](https://github.com/Revolyssup/discoded/blob/master/docs/images/Architecture (1).jpg?raw=true)
+![If you're seeing this text means somehow my image got renamed or deleted lol](https://github.com/Revolyssup/discoded/blob/master/docs/images/Architecture(1).jpg?raw=true)
 1. The express server exposes api endpoints which take up the language,code and standard input in request's body from client.(Discord bot or code editor)
 
 2. The server hashes the entire code along with its input and checks with the database(first redis then mongodb) if that hashed value already exists.
