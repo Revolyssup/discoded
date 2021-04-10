@@ -109,18 +109,3 @@ export async function checkCaching2(){
     return prom.data;
 }
 
-
-export async function checkTimeout(){
-    const language="cpp";
-    const code="#include<iostream>\nint main(){\n while(1){}}";
-    const input="5";
-    const prom= await axios({
-        url:'http://localhost:3000/api/newcode', 
-        method:'POST',
-        data:{
-            input, code, language
-        } 
-    });
-
-    return prom.data;
-}
