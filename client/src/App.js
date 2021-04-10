@@ -30,17 +30,16 @@ class App extends React.Component {
   }
 
   //takes a default language and set up some boilerplate
-  defaultCode=(language)=>{
-    let code=' '
+  defaultCode = (language) => {
+    let code = ' '
     switch (language){
       case 'cpp':{
         code=`#include<iostream>
 
-
-        int main(){
-          std::cout<<"You are running goglot code runner";
-        }
-        `
+int main(){
+  std::cout<<"You are running goglot code runner";
+}
+`
         break;
       }
       case 'c':{
@@ -91,9 +90,7 @@ class App extends React.Component {
       language = 'python';
     else if (event.target.value === 'Go')
       language = 'go';
-    this.setState({ language ,code:this.defaultCode(language)})
-
-
+    this.setState({ language, code:this.defaultCode(language)})
   }
 
   // Set the theme of the editor using this function
@@ -106,6 +103,7 @@ class App extends React.Component {
 
   // Save code into the state
   saveCode = (newValue) => {
+    console.log(newValue)
     this.setState({ code: newValue });
   }
 
@@ -123,6 +121,8 @@ class App extends React.Component {
       input: this.state.input
     }
 
+    console.log(JSON.stringify(data))
+
     axios.post('/api/newcode', data)
       .then(res => {
         this.setState({ output: res.data });
@@ -130,32 +130,7 @@ class App extends React.Component {
       .catch(err => console.log(err));
   }
 
-  // handle modal
-  handleCloseModal = (e) => {
-    e.preventDefault();
-    this.setState({ showModal: false });
-    if (this.state.whichModal === 'Add')
-      this.setState((prevState, props) => {
-        return ({
-          collaborators: prevState.collaborators.add(this.state.inputField)
-        })
-      })
-    else
-      this.setState((prevState, props) => {
-        prevState.collaborators.delete(this.state.inputField);
-        return ({
-          collaborators: this.state.collaborators
-        })
-      })
-  }
-
-  handleOpenModal = (e) => {
-    this.setState({ showModal: true });
-    console.log(e.currentTarget.innerHTML);
-    if (this.state.inputField)
-      this.setState({ whichModal: e.currentTarget.innerHTML })
-  }
-
+ 
   render() {
     const code = this.state.code;
     const options = {
@@ -179,16 +154,6 @@ class App extends React.Component {
             editorDidMount={this.editorDidMount}
           />
         </div>
-        {/* <div className="view">
-          <div className="info">Your socket id is: 65555423fhjv65</div>
-          <div className="msgBlock"></div>
-          <div className="field">
-            <form className="form">
-              <input className="inputField" placeholder="Type your message..."></input>
-              <button className="button">Send</button>
-            </form>
-          </div>
-        </div> */}
         <div className='input'>
           <textarea
             className='textBox'
@@ -205,28 +170,7 @@ class App extends React.Component {
             </code>
           </div>
         </div>
-        {/* <ReactModal
-          isOpen={this.state.showModal}
-          contentLabel="onRequestClose Example"
-          onRequestClose={this.handleCloseModal}
-          className="Modal"
-          overlayClassName="Overlay"
-        >
-          <div>
-            <form>
-              <div>
-                HINT: Socket ID can be found on right side of your screen (on top of chat section)
-              </div>
-              <label htmlFor="socketID">Enter Socker ID of the Collaborator</label>
-              <input
-                name="socketID"
-                type="text"
-                placeholder="Enter socket id"
-                onChange={e => this.setState({ inputField: e.target.value })}></input>
-              <Button click={this.handleCloseModal} name="Submit" />
-            </form>
-          </div>
-        </ReactModal> */}
+
       </div>
     );
   }
