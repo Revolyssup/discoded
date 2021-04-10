@@ -23,8 +23,6 @@ const redisclient:RedisClient=redis.createClient({
   
 })
 
-// const getfromredis=promisify(redisclient.get).bind(client);
-// const setonredis=promisify(redisclient.set).bind(client);
 
 
 export class UserDAO {
