@@ -20,6 +20,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
+      - name: switch branch
+        run: git checkout testing
       - name: Build the stack
         run: chmod +x ./main.sh && ./main.sh
       - name: Test
