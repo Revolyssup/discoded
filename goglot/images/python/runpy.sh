@@ -1,3 +1,3 @@
 #!/bin/bash
-echo -E "$2" > "$3"
-echo "$1" | python "$3"
+printf "%s\n" "$2" >> "$3"
+printf "%s\n" "$1"  | python "$3"

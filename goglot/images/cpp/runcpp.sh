@@ -1,5 +1,5 @@
 #!/bin/bash
-echo -E "$2" > "$3"
+printf "%s\n" "$2" >> "$3"
 g++ -o myapp "$3"
-echo "$1" | ./myapp
+printf "%s\n" "$1"  | ./myapp
 
