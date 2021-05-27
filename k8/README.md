@@ -1,0 +1,2 @@
+## The kubernetes objects here are not defined in very intelligent way. I am not using PVC, or ingress controller which I should have been using in production.
+## Automated Workflow testing is done in docker compose.And in production , docker swarm would be enough as an optimal choice considering this is a small project. But I just wanted to run the entire thing in a K8 cluster quick and dirty.
