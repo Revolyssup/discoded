@@ -43,6 +43,12 @@ func CodeRunner(ctx context.Context, in Input) (Output, error) {
 			filename = "test.py"
 			image = "revoly/pyrunner"
 		}
+	case "monkey", "monke":
+		{
+			script = "./runmonkey.sh"
+			filename = "input.monkey"
+			image = "revoly/monkeyrunner"
+		}
 	default:
 		{
 			return out, errors.New("Invalid Language")

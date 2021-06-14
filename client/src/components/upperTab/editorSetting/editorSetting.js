@@ -6,6 +6,7 @@ export default function editorSetting({ getLanguage, getTheme }) {
         <div>
             <label className={Classes.controlLabel}>Language</label>
             <select className={Classes.picker} onChange={getLanguage}>
+                <option>Monkey</option>
                 <option>JavaScript</option>
                 <option>C++</option>
                 <option>C</option>

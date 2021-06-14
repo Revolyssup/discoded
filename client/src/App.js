@@ -13,8 +13,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      code: 'console.log("You are using goglot code runner!") ',
-      language: 'javascript',
+      code: 'print("You are using goglot code runner!") ',
+      language: 'monkey',
       theme: 'vs-dark',
       output: '',
       input: '',
@@ -71,6 +71,10 @@ int main(){
         code=`console.log("You are using goglot code runner")`
         break;
       }
+      case 'monkey':{
+        code=`print("You are using goglot code runner")`
+        break;
+      }
       default:{code=`//Welcome to goglot.`}
       
     }
@@ -90,6 +94,8 @@ int main(){
       language = 'python';
     else if (event.target.value === 'Go')
       language = 'go';
+    else if (event.target.value === 'Go')
+      language='monkey'
     this.setState({ language, code:this.defaultCode(language)})
   }
 
