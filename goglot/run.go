@@ -43,7 +43,7 @@ func CodeRunner(ctx context.Context, in Input) (Output, error) {
 			filename = "test.py"
 			image = "revoly/pyrunner"
 		}
-	case "monkey", "monke":
+	case "monkey", "monke": //A short interpreted language on top of Go. Go to github.com/Revolyssup/monkey
 		{
 			script = "./runmonkey.sh"
 			filename = "input.monkey"
