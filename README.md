@@ -8,9 +8,9 @@
 - The server is split into 5 microservices as a combination of 7 docker containers, one of which is the discord bot, one is nginx reverse proxy,one is the goglot go server where the API calls are made to run the code and other four(you can rescale in main.sh , docker compose is doing the load balancing between containers) are express servers.
 ## Snapshot
 
-![If you're seeing this text means somehow my image got renamed or deleted lol](https://github.com/Revolyssup/discoded/blob/master/docs/images/demo2.png?raw=true)
+![If you're seeing this text means somehow my image got renamed or deleted lol](.https://github.com/Revolyssup/discoded/blob/master/docs/images/discorddemo.png?raw=true)
 
-![If you're seeing this text means somehow my image got renamed or deleted lol](https://github.com/Revolyssup/discoded/blob/master/docs/images/demo.png?raw=true)
+![If you're seeing this text means somehow my image got renamed or deleted lol](https://github.com/Revolyssup/discoded/blob/master/docs/images/frontenddemo.png?raw=true)
 
 ## How does it work?
 
