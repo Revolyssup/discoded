@@ -2,7 +2,7 @@ version: '3'
 
 services:
   load_balancer:
-    image: revoly/nginx
+    image: revoly/nginx:latest
     ports: 
       - "3000:8080"
   mongo:
@@ -24,17 +24,16 @@ services:
           - ./redisdata:/var/lib/redis
         
   goglot:
-    image: revoly/goglot
+    image: revoly/goglot:latest
     ports:
       - 5000:5000
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 
   app1:
-    image: revoly/discoded
+    image: revoly/discoded:latest
     environment:
       - ID=1000
   
   app2:
     image: revoly/discordbot
-
