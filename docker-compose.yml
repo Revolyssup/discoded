@@ -4,7 +4,7 @@ services:
   load_balancer:
     image: revoly/nginx:latest
     ports: 
-      - "3000:8080"
+      - "80:8080"
   mongo:
         image: mongo:latest
         container_name: mongo
