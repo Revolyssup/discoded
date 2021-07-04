@@ -63,6 +63,6 @@ docker-compose down
 to stop the containers. 
 ## Further Improvements.
 
-1. To implement support for database queries like postgres in goglot, with long running containers.
+1. To implement API gateway.
+2. To implement support for database queries like postgres in goglot, with long running containers.
 
-2. To implement some sort of aunthentication service that limits number of requests per user.
