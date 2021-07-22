@@ -1,6 +1,6 @@
 # **Discoded** [Working currently] but [more features to be added]
 *GOGLOT code runner+Discord bot+code editor*
-# [Demo to the app hosted on a azure VM](https://discoded.centralindia.cloudapp.azure.com/)
+
 ![sync workflow](https://github.com/Revolyssup/discoded/actions/workflows/ci.yml/badge.svg?branch=master)
 ![Github issues](https://shields.io/github/issues/Revolyssup/discoded)
 - The discord bot is started as soon as the backend server spins up. The code editor is served as a static react application by nginx.
