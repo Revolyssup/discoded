@@ -1,6 +1,5 @@
 import axios from 'axios';
-import {config} from 'dotenv';
-config();
+
 
 
 export default async function solver(language: string,code: string,input: string){

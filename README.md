@@ -63,6 +63,6 @@ docker-compose down
 to stop the containers. 
 ## Further Improvements.
 
-1. To implement API gateway.
-2. To implement support for database queries like postgres in goglot, with long running containers.
+1. To implement API gateway in Go.
+2. To implement Goglot from scratch for kubernetes with the help of a bunch of controllers(that I also have to write). Basically using kubernetes -to on the fly delete and create pods which is pretty scalable in kubernetes as kubernetes is a beast, lol, most of it's potential is underutilized anyways.
 
